@@ -6,6 +6,7 @@ public class Book {
 	private String title;
 	private int price;
 	private String catergory;
+	
 	public String getBid() {
 		return bid;
 	}

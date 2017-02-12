@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +17,16 @@ import model.BookstoreDAOImp;
 /**
  * Servlet implementation class Main
  */
-@WebServlet("/Main")
-public class Main extends HttpServlet {
+@WebServlet("/Catalog")
+public class Catalog extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BookstoreDAOImp bookstore;
-	private static final String MAIN = "Main.jspx";
+	private static final String CATALOG = "Catalog.jspx";
+	private List<Book> bookList;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Main() {
+    public Catalog() {
         super();
         //BookstoreDAOImp bookstore = new BookstoreDAOImp();
         // TODO Auto-generated constructor stub
@@ -33,8 +35,7 @@ public class Main extends HttpServlet {
     @Override
     public void init() throws ServletException{
     	bookstore = new BookstoreDAOImp();
-    	List<Book> bookList = bookstore.findAllBooks();
-    	this.getServletContext().setAttribute("bookList", bookList);
+    	
     	
     }
 
@@ -45,7 +46,18 @@ public class Main extends HttpServlet {
 		// TODO Auto-generated method stub
 		//BookstoreDAOImp bookstore = new BookstoreDAOImp();
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher(MAIN).forward(request, response);
+		String query = request.getParameter("query");
+		if(query.equals("All")){
+			bookList = bookstore.findAllBooks();
+		}
+		else
+		{
+			bookList = bookstore.findBookByCatergory(query);
+		}
+		
+		request.setAttribute("bookList", bookList);	
+		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/xml/products.jspx");
+		rq.forward(request, response);
 
 	}
 

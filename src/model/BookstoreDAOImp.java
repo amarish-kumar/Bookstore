@@ -109,5 +109,57 @@ public class BookstoreDAOImp implements BookstoreDAO {
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public List<Book> findBookByCatergory(String c) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT *"
+	           + " FROM bookstore.Book"
+	           + " WHERE category=\'" 
+	           + c 
+	           + "\'";
+	    List<Book> books = new ArrayList<Book>();
+	    
+	    try {
+			querySt = conDB.prepareStatement(queryText);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    try {
+			answers = querySt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    try {
+	    	 while (answers.next()) {
+	    		 Book book = new Book();
+	             String bid = answers.getString(1);
+	             String title = answers.getString(2);
+	             String price = answers.getString(3);
+	             String catergory = answers.getString(4);
+	             book.setBid(bid);
+	             book.setTitle(title);
+	             book.setPrice(Integer.parseInt(price));
+	             book.setCatergory(catergory);
+	             books.add(book);
+	             //System.out.println(p + " " + p1 + " " + p2);
+	             
+	             
+	         }
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return books;
+	}
 
 }

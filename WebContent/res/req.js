@@ -6,7 +6,7 @@ $(document).ready(function(){
     $("#all").click(function(){
         $.post("Start",
         {
-          query: "All",
+          query: "All"
         },
         function(data,status){
         	$("#content").html($(data).find("data").html());
@@ -16,7 +16,7 @@ $(document).ready(function(){
     $("#science").click(function(){
         $.post("Start",
         {
-          query: "Science",
+          query: "Science"
         },
         function(data,status){
         	$("#content").html($(data).find("data").html());

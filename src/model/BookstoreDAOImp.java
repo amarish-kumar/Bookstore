@@ -94,7 +94,7 @@ public class BookstoreDAOImp implements BookstoreDAO {
 
 	@Override
 	public void insert(Book book) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

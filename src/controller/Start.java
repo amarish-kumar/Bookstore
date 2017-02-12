@@ -29,7 +29,7 @@ public class Start extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher(MAIN).forward(request, response);
-		//System.out.println(request.getParameter("all"));
+		//System.out.println(request.getParameter("all"))
 
 		
 	}

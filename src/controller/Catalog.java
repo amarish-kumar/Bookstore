@@ -45,7 +45,7 @@ public class Catalog extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//BookstoreDAOImp bookstore = new BookstoreDAOImp();
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath())
 		String query = request.getParameter("query");
 		if(query.equals("All")){
 			bookList = bookstore.findAllBooks();

@@ -161,5 +161,54 @@ public class BookstoreDAOImp implements BookstoreDAO {
 		}
 		return books;
 	}
+	@Override
+	public Book findBookById(String bid) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT *"
+	           + " FROM bookstore.Book"
+	           + " WHERE bid=\'" 
+	           + bid 
+	           + "\'";
+	   	 Book book = new Book();
+	    
+	    try {
+			querySt = conDB.prepareStatement(queryText);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    try {
+			answers = querySt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    try {
+	    	 answers.next();
+	         String bid1 = answers.getString(1);
+	         String title = answers.getString(2);
+	         String price = answers.getString(3);
+	         String catergory = answers.getString(4);
+	         book.setBid(bid1);
+	         book.setTitle(title);
+	         book.setPrice(Integer.parseInt(price));
+	         book.setCatergory(catergory);
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    	
+	    return book;
+	}
 
 }

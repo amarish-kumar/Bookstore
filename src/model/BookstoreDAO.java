@@ -9,4 +9,5 @@ public interface BookstoreDAO {
 	public void insert(Book book);
 	public void update(Book book);
 	public void delete(String bid);
+	public Book findBookById(String bid);
 }

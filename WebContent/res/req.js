@@ -36,7 +36,11 @@ $(document).ready(function(){
         map,
         function(data, status){
             //alert("Data: " + data + "\nStatus: " + status);
-        	$("body").html(data);
+        	//$("body").html(data);;
+        	//$("#content").html($(data).find("data").html());
+        	document.open();
+            document.write(data);
+            document.close();
         });
     });
     
@@ -53,11 +57,59 @@ $(document).ready(function(){
     	}
     	else{
     		map[key] = val;
-    		alert(map[key]);
+    		//alert(map[key]);
     	}
     	updateCart();
     	
     });
+    
+//    $(document).on('click', '.add', function() {
+//        //alert("hello");
+//    	var curQuan = parseInt($(".quan").eq($(this).attr("value")).text());
+//    	var val = parseInt($(".quanInput").eq($(this).attr("value")).val());
+//    	var newQuan = curQuan + val;
+//    	$(".quan").eq($(this).attr("value")).text(newQuan);
+//    	var key = $(this).attr("name");
+//    	var quan = $(".quan").eq($(this).attr("value")).text();
+//    	map[key] = quan;
+//    	 $.post("/4413project/Start/",
+//    		    map,
+//    		   function(data, status){
+//    		            //alert("Data: " + data + "\nStatus: " + status);
+//         			$("#content").html($(data).find("data").html());
+//    		 
+//
+//    		     		        	
+//    	 		});
+//    	
+//    	
+//    	
+//    	
+//    });
+//    
+//    $(document).on('click', '.remove', function() {
+//        //alert("hello");
+//    	var curQuan = parseInt($(".quan").eq($(this).attr("value")).text());
+//    	var val = parseInt($(".quanInput").eq($(this).attr("value")).val());
+//    	if(curQuan > 0 && curQuan >= val){
+//    		
+//    		var newQuan = curQuan - val;
+//    		$(".quan").eq($(this).attr("value")).text(newQuan);
+//    	}
+//    	//alert($(".quan").eq($(this).attr("value")).text());
+//    	//alert($(".quanInput").eq($(this).attr("value")).val());
+//    	//total +=  + $(".addQuan").eq($(this).attr("value")).val();
+//    	//$("#cart").val(total);
+//    	//var key = $(this).attr("name");
+//    	//var val = $(".addQuan").eq($(this).attr("value")).val();
+//    	//var table = $("#tab");
+//    	//var index = $(this).attr("value");
+////    	var val = $("#q0").val();
+////    	alert(val);
+//    	
+//    	
+//    	
+//    });
     
     function updateCart(){
     	var total = 0;

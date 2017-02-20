@@ -9,6 +9,8 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
 <data>
+<!--<c:set var="i" scope="session" value="-1"/>-->
+<c:set var="books" scope="session" value="${sessionScope.bookList}"/>
 		<table border="1">
 			<tr>
 				<th>Picture</th>
@@ -19,15 +21,26 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 				<th>Reviews</th>
 				<th>Buy</th>
 			</tr>
-			<c:forEach var="book" items="${sessionScope.bookList}">
+			<!--<c:forEach var="book" items="${sessionScope.bookList}">
 				<tr>
 					<td></td>
 					<td>${book.getTitle()}</td>
 					<td>${book.getPrice()}</td>
 					<td>${book.getCatergory()}</td>
-					<td></td>
+					<td>${books[0].getTitle()}</td>
 					<td><a>Write review</a></td>
-					<td><BUTTON class="addCart" name="${book.getBid()}">Add</BUTTON><input class="addQuan" type="text" value="0" size="2"/></td>
+					<td><BUTTON class="addCart" name="${book.getBid()}" value="${i = i + 1}">Add</BUTTON><input class="addQuan" type="text" value="0" size="2"/></td>
+				</tr>
+			</c:forEach>-->
+			<c:forEach var="i" begin="0" end="${books.size()-1}">
+				<tr>
+					<td></td>
+					<td>${books[i].getTitle()}</td>
+					<td>${books[i].getPrice()}</td>
+					<td>${books[i].getCatergory()}</td>
+					<td>none</td>
+					<td><a>Write review</a></td>
+					<td><BUTTON class="addCart" name="${books[i].getBid()}" value="${i}">Add</BUTTON><input class="addQuan" type="text" value="0" size="2"/></td>
 				</tr>
 			</c:forEach>
 			

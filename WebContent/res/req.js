@@ -32,6 +32,7 @@ $(document).ready(function(){
     });
     
     $("#checkout").click(function(){
+    	map["reqtype"] = "checkout";
         $.post("/4413project/Start/",
         map,
         function(data, status){
@@ -50,16 +51,24 @@ $(document).ready(function(){
     	//total +=  + $(".addQuan").eq($(this).attr("value")).val();
     	//$("#cart").val(total);
     	var key = $(this).attr("name");
-    	var val = $(".addQuan").eq($(this).attr("value")).val();
-    	map[key] = val;
-    	if(map.hasOwnProperty(key) && map[key] == 0){
-    		delete map[key];
+    	var val = parseInt($(".addQuan").eq($(this).attr("value")).val());
+    	if(val > 0){
+    		//map[key] = val;
+        	if(map.hasOwnProperty(key)){
+        		var oldQuan = map[key];
+        		var newQuan = oldQuan + val;
+        		map[key] = newQuan;
+        	}
+        	else{
+        		map[key] = val;
+        		//alert(map[key]);
+        	}
+        	updateCart();
     	}
     	else{
-    		map[key] = val;
-    		//alert(map[key]);
+    		alert("invalid quantity");
     	}
-    	updateCart();
+    
     	
     });
     

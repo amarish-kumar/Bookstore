@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">;</script>
+<script type="text/javascript" src="res/payment.js">;</script>
+</head>
+<body>
+	<div id="loginArea">
+		<label for="log">Login: </label>
+		<input id="log" type="text"/><br/>
+		<label for="pass">Password: </label>
+		<input id="pass" type="text"/><br/>
+		<button id="sub">Submit</button>
+		<button id="create">Create Account</button>
+	</div>
+	<div id="content"></div>
+</body>
+</html>
+</jsp:root>

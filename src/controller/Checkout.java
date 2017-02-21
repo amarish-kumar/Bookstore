@@ -27,17 +27,16 @@ public class Checkout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String CHECKOUT = "Checkout.jspx";
 	//private List<Book> checkOutBookList;
-	private Map<Book,String> checkOutBookList;
-	private BookstoreDAOImp bookstore;
-	private int cost;
+//	private Map<Book,String> checkOutBookList;
+//	private BookstoreDAOImp bookstore;
+//	private int cost;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Checkout() {
         super();
-    	bookstore = new BookstoreDAOImp();
-    	//checkOutBookList = new ArrayList<Book>();
-    	checkOutBookList = new HashMap<Book,String>();
+//    	bookstore = new BookstoreDAOImp();
+//    	checkOutBookList = new HashMap<Book,String>();
     	
 
         // TODO Auto-generated constructor stub
@@ -57,7 +56,7 @@ public class Checkout extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+	/*
 		Map<String,String[]> map = request.getParameterMap();
 		
 		if(!map.isEmpty()){
@@ -79,8 +78,8 @@ public class Checkout extends HttpServlet {
 			request.getSession().setAttribute("cost",cost);
 			request.getSession().setAttribute("checkOutBookList", checkOutBookList);
 
-		}
-		
+		}*/
+
 		request.getRequestDispatcher(CHECKOUT).forward(request, response);
 	
 	}

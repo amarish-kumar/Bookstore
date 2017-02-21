@@ -53,6 +53,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 					</c:forEach>
 					
 				</table>
+				<button id="payment">Payment</button>
 			</div>  
 	    </c:otherwise>
 	</c:choose>

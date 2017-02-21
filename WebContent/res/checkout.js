@@ -13,6 +13,7 @@ $(document).ready(function(){
     	var key = $(this).attr("name");
     	var quan = $(".quan").eq($(this).attr("value")).text();
     	if(curQuan > 0){
+        	map["reqtype"] = "checkout";
     		map[key] = quan;
         	$.post("/4413project/Start/",
         		    map,
@@ -25,7 +26,9 @@ $(document).ready(function(){
         		     		        	
         	 		});
     	}
-    	
+    	else{
+    		alert("invalid quantity");
+    	}
     	
     });
     
@@ -39,6 +42,7 @@ $(document).ready(function(){
     		$(".quan").eq($(this).attr("value")).text(newQuan);
     		var key = $(this).attr("name");
         	var quan = $(".quan").eq($(this).attr("value")).text();
+        	map["reqtype"] = "checkout";
         	map[key] = quan;
         	$.post("/4413project/Start/",
         		    map,
@@ -51,7 +55,9 @@ $(document).ready(function(){
        		 		     		        	
         	 		});
     	}
-    	
+    	else{
+    		alert("invalid quantity");
+    	}
     });
     
 	$(document).on('click', '.delete', function() {
@@ -62,6 +68,7 @@ $(document).ready(function(){
     	//$(".quan").eq($(this).attr("value")).text(newQuan);
     	var key = $(this).attr("name");
     	//var quan = $(".quan").eq($(this).attr("value")).text();
+    	map["reqtype"] = "checkout";
     	map[key] = 0;
     	$.post("/4413project/Start/",
     		    map,
@@ -73,6 +80,18 @@ $(document).ready(function(){
 		             document.close();
     		     		        	
     	 		});
+    	
+    });
+	
+	$(document).on('click', '#payment', function() {
+		 $.get("/4413project/Start/?payment=true",
+			        function(data,status){
+					 document.open();
+		             document.write(data);
+		             document.close();
+			 		//alert(data);
+	     		        	
+			        });
     	
     });
 });

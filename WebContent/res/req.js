@@ -5,27 +5,27 @@
 $(document).ready(function(){
 	var map = {};
     $("#all").click(function(){
-        $.get("/4413project/Start/?query=All",
+        $.get("/4413project/Start/?reqtype=catalog&query=All",
         function(data,status){
         	$("#content").html($(data).find("data").html());
         });
     });
     
     $("#science").click(function(){
-        $.get("/4413project/Start/?query=Science",
+        $.get("/4413project/Start/?reqtype=catalog&query=Science",
         function(data,status){
         	$("#content").html($(data).find("data").html());
         });
     });
     
     $("#engineering").click(function(){
-        $.get("/4413project/Start/?query=Engineering",
+    	$.get("/4413project/Start/?reqtype=catalog&query=Engineering",
         function(data,status){
         	$("#content").html($(data).find("data").html());
         });
     });
     $("#fiction").click(function(){
-        $.get("/4413project/Start/?query=Fiction",
+        $.get("/4413project/Start/?reqtype=catalog&query=Fiction",
         function(data,status){
         	$("#content").html($(data).find("data").html());
         });

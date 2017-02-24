@@ -84,7 +84,7 @@ $(document).ready(function(){
     });
 	
 	$(document).on('click', '#payment', function() {
-		 $.get("/4413project/Start/?payment=true",
+		 $.get("/4413project/Start/?reqtype=payment",
 			        function(data,status){
 					 document.open();
 		             document.write(data);

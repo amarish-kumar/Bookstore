@@ -210,5 +210,100 @@ public class BookstoreDAOImp implements BookstoreDAO {
 	    	
 	    return book;
 	}
+	@Override
+	public void insertAddress(Address add) {
+		String            updateText = "";     // The SQL text.
+	    PreparedStatement updateSt   = null;   // The query handle.
+	    int answer = 0;
+	    updateText =
+	             "INSERT INTO Address (street, province, country, zip, phone)"
+	           + " VALUE (" 
+	           + "\'" + add.getStreet() + "\',"
+	           + "\'" + add.getProvince() + "\',"
+	           + "\'" + add.getCountry() + "\',"
+	           + "\'" + add.getZip() + "\',"
+	           + "\'" + add.getPhone() + "\')";
+	            		 
+	          
+	    
+	    try {
+	    	updateSt = conDB.prepareStatement(updateText);
+			answer = updateSt.executeUpdate();
+			updateSt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+		
+	}
+	@Override
+	public void insertAccount(AccountModel acc) {
+		String            updateText = "";     // The SQL text.
+	    PreparedStatement updateSt   = null;   // The query handle.
+	    int answer = 0;
+	    updateText =
+	             "INSERT INTO Account (address, login, fname, lname, pass)"
+	           + " VALUE (" 
+	           + acc.getAddress() + ","
+	           + "\'" + acc.getLogin() + "\',"
+	    	   + "\'" + acc.getFname() + "\',"
+	    	   + "\'" + acc.getLname() + "\',"
+	    	   + "\'" + acc.getPass() + "\')";      		 
+	    try {
+			updateSt = conDB.prepareStatement(updateText);
+			answer = updateSt.executeUpdate();
+			updateSt.close();
+
+	    } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
+	    
+		
+	}
+	@Override
+	public int getAddressId(String street, String province, String country, String zip, String phone) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT id"
+	           + " FROM bookstore.Address"
+	           + " WHERE street=\'" 
+	           + street 
+	           + "\'"
+	           + " and province=\'" 
+	           + province 
+	           + "\'"
+	           + " and country=\'" 
+	           + country 
+	           + "\'"
+	           + " and zip=\'" 
+	           + zip
+	           + "\'"
+	            + " and phone=\'" 
+	           + phone
+	           + "\'";
+	   	 int id = 0;
+	    
+	    try {
+			querySt = conDB.prepareStatement(queryText);
+			answers = querySt.executeQuery();
+			answers.next();
+	        String res = answers.getString(1);
+	        id = Integer.parseInt(res);
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		return id;
+	}
 
 }

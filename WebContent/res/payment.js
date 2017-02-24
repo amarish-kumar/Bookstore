@@ -23,4 +23,15 @@ $(document).ready(function(){
         });
     });
     
+
+    $("#create").click(function(){
+        $.get("/4413project/Start/?reqtype=account",
+        function(data, status){
+        	//alert(data);
+        	document.open();
+            document.write(data);
+            document.close();
+        });
+    });
+    
 });

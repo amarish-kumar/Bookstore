@@ -45,14 +45,21 @@ public class Start extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String query = request.getParameter("query");
-		String payment = request.getParameter("payment");
-		if(query != null){
+//		String query = request.getParameter("query");
+//		String payment = request.getParameter("payment");
+		String reqtype = request.getParameter("reqtype");
+		if(reqtype != null && reqtype.equals("catalog")){
 			request.getRequestDispatcher("/Catalog").forward(request, response);
 		}
-		else if(payment != null)
+		else if(reqtype != null && reqtype.equals("payment"))
 		{
 			request.getRequestDispatcher("/Payment").forward(request, response);
+			
+			//out.write(this.getServletContext().getInitParameter("appName"));
+		}
+		else if(reqtype != null && reqtype.equals("account"))
+		{
+			request.getRequestDispatcher("/Account").forward(request, response);
 			
 			//out.write(this.getServletContext().getInitParameter("appName"));
 		}
@@ -103,7 +110,9 @@ public class Start extends HttpServlet {
 		else if(reqtype.equals("payment")){
 			request.getRequestDispatcher("/Payment").forward(request, response);
 		}
-		
+		else if(reqtype.equals("account")){
+			request.getRequestDispatcher("/Account").forward(request, response);
+		}
 		//System.out.println(name);
 	}
 

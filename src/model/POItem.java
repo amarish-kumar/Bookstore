@@ -1,7 +1,13 @@
 package model;
 
-public class POItem {
+import java.io.Serializable;
+
+public class POItem implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String bid;
 	private int price;

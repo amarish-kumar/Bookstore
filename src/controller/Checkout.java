@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Book;
 import model.BookstoreDAOImp;
 import model.Calculation;
+import model.POItem;
 
 /**
  * Servlet implementation class Checkout
@@ -30,6 +31,7 @@ public class Checkout extends HttpServlet {
 //	private Map<Book,String> checkOutBookList;
 //	private BookstoreDAOImp bookstore;
 //	private int cost;
+	private List<POItem> poi;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,6 +39,7 @@ public class Checkout extends HttpServlet {
         super();
 //    	bookstore = new BookstoreDAOImp();
 //    	checkOutBookList = new HashMap<Book,String>();
+        poi = new ArrayList<POItem>();
     	
 
         // TODO Auto-generated constructor stub
@@ -79,7 +82,14 @@ public class Checkout extends HttpServlet {
 			request.getSession().setAttribute("checkOutBookList", checkOutBookList);
 
 		}*/
-
+//		@SuppressWarnings("unchecked")
+//		Map<Book,String> map = (Map<Book, String>) request.getSession().getAttribute("checkOutBookList");
+//		Set<Book> ks = map.keySet();
+//		for(Book b : ks){
+//			POItem item = new POItem();
+//			item.setBid(b.getBid());
+//			
+//		}
 		request.getRequestDispatcher(CHECKOUT).forward(request, response);
 	
 	}

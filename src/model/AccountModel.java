@@ -8,22 +8,14 @@ public class AccountModel implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
-	private int address;
 	private String login;
+	private int address;
 	private String fname;
 	private String lname;
 	private String pass;
 	
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public int getAddress() {
 		return address;
 	}
@@ -70,8 +62,8 @@ public class AccountModel implements Serializable {
 		int result = 1;
 		result = prime * result + address;
 		result = prime * result + ((fname == null) ? 0 : fname.hashCode());
-		result = prime * result + id;
 		result = prime * result + ((lname == null) ? 0 : lname.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((pass == null) ? 0 : pass.hashCode());
 		return result;
 	}
@@ -92,12 +84,15 @@ public class AccountModel implements Serializable {
 				return false;
 		} else if (!fname.equals(other.fname))
 			return false;
-		if (id != other.id)
-			return false;
 		if (lname == null) {
 			if (other.lname != null)
 				return false;
 		} else if (!lname.equals(other.lname))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
 			return false;
 		if (pass == null) {
 			if (other.pass != null)
@@ -109,9 +104,10 @@ public class AccountModel implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AccountModel [id=" + id + ", address=" + address + ", fname=" + fname + ", lname=" + lname + ", pass="
-				+ pass + "]";
+		return "AccountModel [login=" + login + ", address=" + address + ", fname=" + fname + ", lname=" + lname
+				+ ", pass=" + pass + "]";
 	}
+
 	
 	
 	

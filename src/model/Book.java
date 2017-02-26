@@ -11,6 +11,7 @@ public class Book implements Serializable{
 	private String title;
 	private int price;
 	private String catergory;
+	private int quan;
 	
 	public String getBid() {
 		return bid;
@@ -37,6 +38,12 @@ public class Book implements Serializable{
 		this.catergory = catergory;
 	}
 	
+	public int getQuan() {
+		return quan;
+	}
+	public void setQuan(int quan) {
+		this.quan = quan;
+	}
 	@Override
 	public String toString() {
 		return "Book [bid=" + bid + ", title=" + title + ", price=" + price + ", catergory=" + catergory + "]";

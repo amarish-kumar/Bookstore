@@ -17,7 +17,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 				<th>Title</th>
 				<th>Price</th>
 				<th>Catergory</th>
-				<th>Rating</th>
+				<th>Available Copies</th>
 				<th>Reviews</th>
 				<th>Buy</th>
 			</tr>
@@ -38,7 +38,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 					<td>${books[i].getTitle()}</td>
 					<td>${books[i].getPrice()}</td>
 					<td>${books[i].getCatergory()}</td>
-					<td>none</td>
+					<td>${books[i].getQuan()}</td>
 					<td><a>Write review</a></td>
 					<td><BUTTON class="addCart" name="${books[i].getBid()}" value="${i}">Add</BUTTON><input class="addQuan" type="text" value="0" size="2"/></td>
 				</tr>

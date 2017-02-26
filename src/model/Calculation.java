@@ -16,4 +16,10 @@ public final class Calculation {
 		return cost;
 		
 	}
+	
+	public static int calculateCost(Book b, int quan){
+		int result = b.getPrice()*quan;
+		return result;
+		
+	}
 }

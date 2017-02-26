@@ -73,10 +73,12 @@ public class BookstoreDAOImp implements BookstoreDAO {
 	             String title = answers.getString(2);
 	             String price = answers.getString(3);
 	             String catergory = answers.getString(4);
+	             int quan = Integer.parseInt(answers.getString(5));
 	             book.setBid(bid);
 	             book.setTitle(title);
 	             book.setPrice(Integer.parseInt(price));
 	             book.setCatergory(catergory);
+	             book.setQuan(quan);
 	             books.add(book);
 	             //System.out.println(p + " " + p1 + " " + p2);
 	             
@@ -143,10 +145,12 @@ public class BookstoreDAOImp implements BookstoreDAO {
 	             String title = answers.getString(2);
 	             String price = answers.getString(3);
 	             String catergory = answers.getString(4);
+	             int quan = Integer.parseInt(answers.getString(5));
 	             book.setBid(bid);
 	             book.setTitle(title);
 	             book.setPrice(Integer.parseInt(price));
 	             book.setCatergory(catergory);
+	             book.setQuan(quan);
 	             books.add(book);
 	             //System.out.println(p + " " + p1 + " " + p2);
 	             
@@ -194,10 +198,13 @@ public class BookstoreDAOImp implements BookstoreDAO {
 	         String title = answers.getString(2);
 	         String price = answers.getString(3);
 	         String catergory = answers.getString(4);
+             int quan = Integer.parseInt(answers.getString(5));
+
 	         book.setBid(bid1);
 	         book.setTitle(title);
 	         book.setPrice(Integer.parseInt(price));
 	         book.setCatergory(catergory);
+	         book.setQuan(quan);
 	    	 
 	    	 answers.close();
 	    	 querySt.close();
@@ -304,6 +311,263 @@ public class BookstoreDAOImp implements BookstoreDAO {
 		}
 	    
 		return id;
+	}
+	@Override
+	public String getPassword(String login) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT pass"
+	           + " FROM bookstore.Account"
+	           + " WHERE login=\'" 
+	           + login 
+	           + "\'";
+	    String pass = null;
+	    try {
+			 querySt = conDB.prepareStatement(queryText);
+			 answers = querySt.executeQuery();
+			 
+			 if(answers.next())
+			 {
+		         pass = answers.getString(1);
+			 }
+		
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    	
+		return pass;
+	}
+	@Override
+	public void insertPO(PO po) {
+		String            updateText = "";     // The SQL text.
+	    PreparedStatement updateSt   = null;   // The query handle.
+	    int answer = 0;
+	    updateText =
+	             "INSERT INTO PO (lname, fname, status, address)"
+	           + " VALUE (" 
+	           + "\'" + po.getLname() + "\',"
+	    	   + "\'" + po.getFname() + "\',"
+	    	   + "\'" + po.getStatus() + "\',"
+	    	   + po.getAddress() + ")";      		 
+	    try {
+			updateSt = conDB.prepareStatement(updateText);
+			answer = updateSt.executeUpdate();
+			updateSt.close();
+
+	    } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
+	}
+	@Override
+	public int getAccountAddress(String login) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT address"
+	           + " FROM bookstore.Account"
+	           + " WHERE login=\'" 
+	           + login 
+	           + "\'";
+	    int address = 0;
+	    try {
+			 querySt = conDB.prepareStatement(queryText);
+			 answers = querySt.executeQuery();
+			 
+			 if(answers.next())
+			 {
+		         address = Integer.parseInt(answers.getString(1));
+			 }
+		
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    	
+		return address;
+	}
+	@Override
+	public String getLname(String login) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT lname"
+	           + " FROM bookstore.Account"
+	           + " WHERE login=\'" 
+	           + login 
+	           + "\'";
+	    String Lname = null;
+	    try {
+			 querySt = conDB.prepareStatement(queryText);
+			 answers = querySt.executeQuery();
+			 
+			 if(answers.next())
+			 {
+		         Lname = answers.getString(1);
+			 }
+		
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    	
+		return Lname;
+	}
+	@Override
+	public String getFname(String login) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT fname"
+	           + " FROM bookstore.Account"
+	           + " WHERE login=\'" 
+	           + login 
+	           + "\'";
+	    String fname = null;
+	    try {
+			 querySt = conDB.prepareStatement(queryText);
+			 answers = querySt.executeQuery();
+			 
+			 if(answers.next())
+			 {
+		         fname = answers.getString(1);
+			 }
+		
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    	
+		return fname;
+	}
+	@Override
+	public int getPOId(String lname, String fname, String status, int address) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT id"
+	           + " FROM bookstore.PO"
+	           + " WHERE lname=\'" 
+	           + lname 
+	           + "\'"
+	           + " and fname=\'" 
+	           + fname 
+	           + "\'"
+	           + " and status=\'" 
+	           + status 
+	           + "\'"
+	           + " and address=" 
+	           + address;
+	          
+	   	 int id = 0;
+	    
+	    try {
+			querySt = conDB.prepareStatement(queryText);
+			answers = querySt.executeQuery();
+			if(answers.last()){
+				 String res = answers.getString(1);
+			     id = Integer.parseInt(res);
+			}	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		return id;
+	}
+	@Override
+	public void insertPOItem(POItem poi) {
+		String            updateText = "";     // The SQL text.
+	    PreparedStatement updateSt   = null;   // The query handle.
+	    int answer = 0;
+	    updateText =
+	             "INSERT INTO POItem (id, bid, quan, price)"
+	           + " VALUE (" 
+	           + poi.getId() + ","
+	    	   + "\'" + poi.getBid() + "\',"
+	    	   + poi.getQuan() + ","
+	    	   + poi.getPrice() + ")";      		 
+	    try {
+			updateSt = conDB.prepareStatement(updateText);
+			answer = updateSt.executeUpdate();
+			updateSt.close();
+
+	    } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
+	}
+	@Override
+	public Address getAddress(int id) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT *"
+	           + " FROM bookstore.Address"
+	           + " WHERE id="
+	           + id;
+	   	 Address address = new Address();
+	    
+	    try {
+			 querySt = conDB.prepareStatement(queryText);
+			 answers = querySt.executeQuery();
+			 answers.next();
+	         int addid = Integer.parseInt(answers.getString(1));
+	         String street = answers.getString(2);
+	         String province = answers.getString(3);
+	         String country = answers.getString(4);
+	         String zip = answers.getString(5);
+	         String phone = answers.getString(6);
+
+	         address.setId(addid);
+	         address.setStreet(street);
+	         address.setProvince(province);
+	         address.setCountry(country);
+	         address.setZip(zip);
+	         address.setPhone(phone);
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	   
+	    	
+	    return address;
 	}
 
 }

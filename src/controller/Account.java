@@ -67,13 +67,11 @@ public class Account extends HttpServlet {
 		int id = bookstore.getAddressId(street, province, country, zip, phone);
 		address.setId(id);
 		AccountModel account = new AccountModel();
-		account.setAddress(id);
 		account.setLogin(login);
+		account.setAddress(id);
 		account.setFname(fname);
 		account.setLname(lname);
 		account.setPass(pass);
-		
-		bookstore.insertAddress(address);
 		bookstore.insertAccount(account);
 		
 	}

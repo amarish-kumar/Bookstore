@@ -10,6 +10,7 @@ public class POItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String bid;
+	private int quan;
 	private int price;
 	public int getId() {
 		return id;
@@ -28,6 +29,13 @@ public class POItem implements Serializable{
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	
+	public int getQuan() {
+		return quan;
+	}
+	public void setQuan(int quan) {
+		this.quan = quan;
 	}
 	@Override
 	public String toString() {

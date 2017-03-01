@@ -14,13 +14,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.AccountModel;
-import model.Address;
-import model.Book;
+import bean.AccountModel;
+import bean.Address;
+import bean.Book;
+import bean.PO;
+import bean.POItem;
+import model.AccountDAO;
+import model.AddressDAO;
 import model.BookstoreDAOImp;
 import model.Calculation;
-import model.PO;
-import model.POItem;
+import model.PODAO;
+import model.POItemDAO;
 
 /**
  * Servlet implementation class Payment
@@ -32,6 +36,10 @@ public class Payment extends HttpServlet {
 	private static final String ORDERPROCESS = "OrderProcess.jspx";
 
 	private BookstoreDAOImp bookstore;
+	private AddressDAO adao;
+	private AccountDAO accdao;
+	private POItemDAO poidao;
+	private PODAO podao;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,6 +47,10 @@ public class Payment extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     	bookstore = new BookstoreDAOImp();
+    	adao = new AddressDAO();
+    	accdao = new AccountDAO();
+    	poidao = new POItemDAO();
+    	podao = new PODAO();
 
     }
 
@@ -61,30 +73,32 @@ public class Payment extends HttpServlet {
 		Map<String,String[]> map = request.getParameterMap();
 		String login = map.get("login")[0];
 		String password = map.get("password")[0];
-		String pass = bookstore.getPassword(login);
+		String pass = accdao.getPassword(login);
 		Writer out = response.getWriter();
 		//out.write(pass + " " + password);
 		if(pass != null){
 			if(pass.equals(password))
 			{
 				int address = bookstore.getAccountAddress(login);
-				AccountModel account = bookstore.getAccount(login);
+				AccountModel account = accdao.getAccount(login);
 				List<POItem> poitems = new ArrayList<POItem>();
 
-				String lname = bookstore.getLname(login);
-				String fname = bookstore.getFname(login);
+//				String lname = bookstore.getLname(login);
+//				String fname = bookstore.getFname(login);
+				String lname = account.getLname();
+				String fname = account.getFname();
 				PO po = new PO();
 				po.setLname(lname);
 				po.setFname(fname);
 				po.setAddress(address);
 				po.setStatus("ORDERED");
-				bookstore.insertPO(po);
-				int id = bookstore.getPOId(lname, fname, po.getStatus(), address);
+				podao.insertPO(po);
+				int id = podao.getPOId(lname, fname, po.getStatus(), address);
 				if(id > 0){
 					@SuppressWarnings("unchecked")
 					Map<Book,String> booklist = (Map<Book,String>) request.getSession().getAttribute("checkOutBookList");
 					Set<Book> ks = new HashSet<Book>(booklist.keySet());
-					Address addr = bookstore.getAddress(address);
+					Address addr = adao.getAddress(address);
 					for(Book b : ks){
 						POItem poi = new POItem();
 						int quan = Integer.parseInt(booklist.get(b));
@@ -93,7 +107,7 @@ public class Payment extends HttpServlet {
 						poi.setBid(b.getBid());
 						poi.setQuan(quan);
 						poi.setPrice(price);
-						bookstore.insertPOItem(poi);
+						poidao.insertPOItem(poi);
 						poitems.add(poi);
 						
 					}

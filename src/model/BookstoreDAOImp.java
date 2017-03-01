@@ -8,6 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.AccountModel;
+import bean.Address;
+import bean.Book;
+import bean.CreditCard;
+import bean.PO;
+import bean.POItem;
+
 public class BookstoreDAOImp implements BookstoreDAO {
 
 	private Connection conDB;   // Connection to the database system.

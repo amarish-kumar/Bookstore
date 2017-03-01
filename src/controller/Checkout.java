@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Book;
+import bean.Book;
+import bean.POItem;
 import model.BookstoreDAOImp;
 import model.Calculation;
-import model.POItem;
 
 /**
  * Servlet implementation class Checkout

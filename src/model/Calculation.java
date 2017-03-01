@@ -3,6 +3,8 @@ package model;
 import java.util.Map;
 import java.util.Set;
 
+import bean.Book;
+
 public final class Calculation {
 	public static int calculateCost(Map<Book,String> m){
 		

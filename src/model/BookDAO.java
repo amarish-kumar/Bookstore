@@ -13,6 +13,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import bean.Book;
+
 
 
 public class BookDAO {
@@ -77,11 +79,11 @@ public class BookDAO {
 		ResultSet r = p.executeQuery();
 	   	Book book = new Book();
 	    r.next();
-        String bid1 = r.getString(1);
-        String title = r.getString(2);
-        String price = r.getString(3);
-        String catergory = r.getString(4);
-        int quan = Integer.parseInt(r.getString(5));
+        String bid1 = r.getString("bid");
+        String title = r.getString("title");
+        String price = r.getString("price");
+        String catergory = r.getString("category");
+        int quan = Integer.parseInt(r.getString("quan"));
 
         book.setBid(bid1);
         book.setTitle(title);
@@ -92,7 +94,49 @@ public class BookDAO {
    	 	r.close();
    	 	p.close();
 
-		return null;
+		return book;
 		
+	}
+	
+	public List<Book> getBookByCatergory(String c) {
+		 List<Book> books = new ArrayList<Book>();
+
+		    try {
+
+				String query =  "SELECT *"
+				           + " FROM bookstore.Book"
+				           + " WHERE category=\'" 
+				           + c 
+				           + "\'";
+				Connection con = this.ds.getConnection();
+				PreparedStatement p = con.prepareStatement(query);
+				ResultSet answers = p.executeQuery();
+				while (answers.next()) {
+					 Book book = new Book();
+				     String bid = answers.getString("bid");
+				     String title = answers.getString("title");
+				     String price = answers.getString("price");
+				     String catergory = answers.getString("category");
+				     int quan = Integer.parseInt(answers.getString("quan"));
+				     book.setBid(bid);
+				     book.setTitle(title);
+				     book.setPrice(Integer.parseInt(price));
+				     book.setCatergory(catergory);
+				     book.setQuan(quan);
+				     books.add(book);
+				 	
+				     
+				 }
+				answers.close();
+		    	p.close();
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	 
+		    
+			return books;	
+	
 	}
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Book;
+import bean.Book;
 import model.BookDAO;
 import model.BookstoreDAOImp;
 
@@ -52,8 +52,8 @@ public class Catalog extends HttpServlet {
 		}
 		else
 		{
-			bookList = bookstore.findBookByCatergory(query);
-		}
+			//bookList = bookstore.findBookByCatergory(query);
+			bookList = bdao.getBookByCatergory(query);		}
 		
 		request.getSession().setAttribute("bookList", bookList);	
 		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/xml/products.jspx");

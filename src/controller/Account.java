@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.AccountModel;
-import model.Address;
+import bean.AccountModel;
+import bean.Address;
+import model.AddressDAO;
 import model.BookstoreDAOImp;
 
 /**
@@ -21,6 +22,7 @@ public class Account extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String ACCOUNT = "Account.jspx";
 	private BookstoreDAOImp bookstore;
+	private AddressDAO adao;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,6 +31,7 @@ public class Account extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     	bookstore = new BookstoreDAOImp();
+    	adao = new AddressDAO();
 
     }
 
@@ -63,8 +66,10 @@ public class Account extends HttpServlet {
 		address.setCountry(country);
 		address.setZip(zip);
 		address.setPhone(phone);
-		bookstore.insertAddress(address);
-		int id = bookstore.getAddressId(street, province, country, zip, phone);
+		//bookstore.insertAddress(address);
+		adao.insertAddress(address);
+		//int id = bookstore.getAddressId(street, province, country, zip, phone);
+		Integer id = adao.getAddressId(street, province, country, zip, phone);
 		address.setId(id);
 		AccountModel account = new AccountModel();
 		account.setLogin(login);

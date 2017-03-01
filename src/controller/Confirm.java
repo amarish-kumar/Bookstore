@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.CreditCard;
+import bean.PO;
 import model.BookstoreDAOImp;
-import model.CreditCard;
-import model.PO;
+import model.CreditCardDAO;
 
 /**
  * Servlet implementation class Confirm
@@ -24,14 +25,14 @@ public class Confirm extends HttpServlet {
 	private static final String VERIFIED = "Verified.jspx";
 
 	private BookstoreDAOImp bookstore;
-
+	private CreditCardDAO ccdao;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Confirm() {
         super();
     	bookstore = new BookstoreDAOImp();
-
+    	ccdao = new CreditCardDAO();
     }
 
 	/**
@@ -49,7 +50,7 @@ public class Confirm extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String,String[]> map = request.getParameterMap();
 		int ccinput = Integer.parseInt(map.get("creditcard")[0]);
-		CreditCard cc = bookstore.getCreditCard(ccinput);
+		CreditCard cc = ccdao.getCreditCard(ccinput);
 		Writer out = response.getWriter();
 		
 		if(cc.getNum() > 0 && cc.getNum() == ccinput)

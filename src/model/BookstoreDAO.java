@@ -2,6 +2,13 @@ package model;
 
 import java.util.List;
 
+import bean.AccountModel;
+import bean.Address;
+import bean.Book;
+import bean.CreditCard;
+import bean.PO;
+import bean.POItem;
+
 public interface BookstoreDAO {
 	
 	public List<Book> findAllBooks();

@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.AccountModel;
-import model.Address;
-import model.Book;
+import bean.AccountModel;
+import bean.Address;
+import bean.Book;
+import bean.PO;
+import bean.POItem;
+import model.AccountDAO;
 import model.BookstoreDAOImp;
 import model.Calculation;
-import model.PO;
-import model.POItem;
 
 /**
  * Servlet implementation class Login
@@ -28,7 +29,7 @@ public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BookstoreDAOImp bookstore;
 	private static final String LOGIN = "/WEB-INF/xml/Login.jspx";
-
+	private AccountDAO accdao;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,6 +37,7 @@ public class Login extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     	bookstore = new BookstoreDAOImp();
+    	accdao = new AccountDAO();
 
     }
 
@@ -62,7 +64,7 @@ public class Login extends HttpServlet {
 		if(pass != null){
 			if(pass.equals(password))
 			{
-				AccountModel account = bookstore.getAccount(login);
+				AccountModel account = accdao.getAccount(login);
 				request.getSession().setAttribute("account",account);
 				request.getRequestDispatcher(LOGIN).forward(request, response);
 

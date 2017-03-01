@@ -71,53 +71,34 @@ $(document).ready(function(){
     
     	
     });
-    
-//    $(document).on('click', '.add', function() {
-//        //alert("hello");
-//    	var curQuan = parseInt($(".quan").eq($(this).attr("value")).text());
-//    	var val = parseInt($(".quanInput").eq($(this).attr("value")).val());
-//    	var newQuan = curQuan + val;
-//    	$(".quan").eq($(this).attr("value")).text(newQuan);
-//    	var key = $(this).attr("name");
-//    	var quan = $(".quan").eq($(this).attr("value")).text();
-//    	map[key] = quan;
-//    	 $.post("/4413project/Start/",
-//    		    map,
-//    		   function(data, status){
-//    		            //alert("Data: " + data + "\nStatus: " + status);
-//         			$("#content").html($(data).find("data").html());
-//    		 
+
+
+//    $("#login").click(function(){
+//    	var loginmap = {};
+//    	loginmap["reqtype"] = "login";
+//    	loginmap["login"] = $("#log").val();
+//    	loginmap["password"] = $("#pass").val();
+//        $.post("/4413project/Start/",
+//        loginmap,
+//        function(data, status){
+////        	document.open();
+////            document.write(data);
+////            document.close();
+//        	//alert(data);
+//        	$("#loginArea").html($(data).find("data").html());
 //
-//    		     		        	
-//    	 		});
-//    	
-//    	
-//    	
-//    	
+//        });
 //    });
 //    
-//    $(document).on('click', '.remove', function() {
-//        //alert("hello");
-//    	var curQuan = parseInt($(".quan").eq($(this).attr("value")).text());
-//    	var val = parseInt($(".quanInput").eq($(this).attr("value")).val());
-//    	if(curQuan > 0 && curQuan >= val){
-//    		
-//    		var newQuan = curQuan - val;
-//    		$(".quan").eq($(this).attr("value")).text(newQuan);
-//    	}
-//    	//alert($(".quan").eq($(this).attr("value")).text());
-//    	//alert($(".quanInput").eq($(this).attr("value")).val());
-//    	//total +=  + $(".addQuan").eq($(this).attr("value")).val();
-//    	//$("#cart").val(total);
-//    	//var key = $(this).attr("name");
-//    	//var val = $(".addQuan").eq($(this).attr("value")).val();
-//    	//var table = $("#tab");
-//    	//var index = $(this).attr("value");
-////    	var val = $("#q0").val();
-////    	alert(val);
-//    	
-//    	
-//    	
+//
+//    $("#create").click(function(){
+//        $.get("/4413project/Start/?reqtype=account",
+//        function(data, status){
+//        	//alert(data);
+//        	document.open();
+//            document.write(data);
+//            document.close();
+//        });
 //    });
     
     function updateCart(){

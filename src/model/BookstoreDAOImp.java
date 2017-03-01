@@ -569,5 +569,89 @@ public class BookstoreDAOImp implements BookstoreDAO {
 	    	
 	    return address;
 	}
+	@Override
+	public AccountModel getAccount(String login) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT *"
+	           + " FROM bookstore.Account"
+	           + " WHERE login=\'" 
+	           + login 
+	           + "\'";
+	    AccountModel account = new AccountModel();
+	    try {
+			 querySt = conDB.prepareStatement(queryText);
+			 answers = querySt.executeQuery();
+			 
+			 if(answers.next())
+			 {
+		         String log = answers.getString(1);
+		         int address = Integer.parseInt(answers.getString(2));
+		         String fname = answers.getString(3);
+		         String lname = answers.getString(4);
+		         String pass = answers.getString(5);
+		         account.setLogin(login);
+		         account.setAddress(address);
+		         account.setFname(fname);
+		         account.setLname(lname);
+		         account.setPass(pass);
+
+
+			 }
+		
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    	
+		return account;
+	}
+	
+	
+	@Override
+	public CreditCard getCreditCard(int num) {
+		String            queryText = "";     // The SQL text.
+	    PreparedStatement querySt   = null;   // The query handle.
+	    ResultSet         answers   = null;   // A cursor.
+	    queryText =
+	             "SELECT *"
+	           + " FROM bookstore.Creditcard"
+	           + " WHERE num=" 
+	           + num;
+	    CreditCard creditcard = new CreditCard();
+	    try {
+			 querySt = conDB.prepareStatement(queryText);
+			 answers = querySt.executeQuery();
+			 
+			 if(answers.next())
+			 {
+		         int num1 = Integer.parseInt(answers.getString(1));
+		         String fname = answers.getString(2);
+		         String lname = answers.getString(3);
+		         creditcard.setNum(num1);
+		         creditcard.setFname(fname);
+		         creditcard.setLname(lname);
+		         
+			 }
+		
+	    	 
+	    	 answers.close();
+	    	 querySt.close();
+	    
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    	
+		return creditcard;
+	}
 
 }

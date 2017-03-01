@@ -11,31 +11,21 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">;</script>
+<script type="text/javascript" src="res/orderprocess.js">;</script>
 </head>
 <body>
-	<c:set var="address" scope="session" value="${sessionScope.address}"/>
-	<c:set var="po" scope="session" value="${sessionScope.po}"/>
+	<c:set var="acc" scope="session" value="${sessionScope.account}"/>
 	<c:set var="poitems" scope="session" value="${sessionScope.poitems}"/>
-	<div id="account">
-			<ul style="list-style-type:none">
-			  <li>Account</li>
-			  <li>First name: ${po.getFname()}</li>
-			  <li>Last name: ${po.getLname()}</li>
-			  <li>Street: ${address.getStreet()}</li>
-			  <li>Province: ${address.getProvince()}</li>
-			  <li>Country: ${address.getCountry()}</li>
-			  <li>Zip: ${address.getZip()}</li>
-			  <li>Phone: ${address.getPhone()}</li>    
-			</ul>
-	</div>
 	
 	<div id="content">	
+		Welcome ${acc.getLogin()}
 		<div>Total cost: <span id="cost">${sessionScope.cost}</span></div>
 		<table id="tab" border="1">
 				<tr>
 					<th>bid</th>
 					<th>quantity</th>
-					<th>Price</th>					
+					<th>Price</th>
 				</tr>
 				<c:forEach items="${poitems}" var="item">
 					<tr>
@@ -45,7 +35,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 					</tr>		
 				</c:forEach>
 		</table>
-		<button id="pay">Pay</button>		
+		<button id="confirm">confirm order</button>		
 		
 	</div>
 	

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Book;
+import model.BookDAO;
 import model.BookstoreDAOImp;
 
 
@@ -24,13 +25,14 @@ public class Catalog extends HttpServlet {
 	private BookstoreDAOImp bookstore;
 	private static final String CATALOG = "Catalog.jspx";
 	private List<Book> bookList;
+	private BookDAO bdao;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Catalog() {
         super();
     	bookstore = new BookstoreDAOImp();
-
+    	bdao = new BookDAO();
         //BookstoreDAOImp bookstore = new BookstoreDAOImp();
         // TODO Auto-generated constructor stub
     }
@@ -46,7 +48,7 @@ public class Catalog extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath())
 		String query = request.getParameter("query");
 		if(query.equals("All")){
-			bookList = bookstore.findAllBooks();
+			bookList = bdao.getAllBooks();
 		}
 		else
 		{

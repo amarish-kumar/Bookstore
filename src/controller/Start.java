@@ -63,6 +63,12 @@ public class Start extends HttpServlet {
 			
 			//out.write(this.getServletContext().getInitParameter("appName"));
 		}
+		else if(reqtype != null && reqtype.equals("confirm"))
+		{
+			request.getRequestDispatcher("/Confirm").forward(request, response);
+			
+			//out.write(this.getServletContext().getInitParameter("appName"));
+		}
 		else
 		{
 			request.getRequestDispatcher(MAIN).forward(request, response);
@@ -113,6 +119,10 @@ public class Start extends HttpServlet {
 		else if(reqtype.equals("account")){
 			request.getRequestDispatcher("/Account").forward(request, response);
 		}
+		else if(reqtype.equals("confirm")){
+			request.getRequestDispatcher("/Confirm").forward(request, response);
+		}
+		
 		//System.out.println(name);
 	}
 

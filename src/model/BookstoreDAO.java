@@ -17,8 +17,10 @@ public interface BookstoreDAO {
 	public Book findBookById(String bid);
 	public String getPassword(String login);
 	public int getAccountAddress(String login);
+	public AccountModel getAccount(String login);
 	public String getLname(String login);
 	public String getFname(String login);
 	public int getPOId(String lname, String fname, String status, int address);
 	public Address getAddress(int id);
+	public CreditCard getCreditCard(int num);
 }

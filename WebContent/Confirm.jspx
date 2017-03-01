@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Confirmation</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">;</script>
+<script type="text/javascript" src="res/confirm.js">;</script>
+</head>
+<body>
+	<c:set var="address" scope="session" value="${sessionScope.address}"/>
+	<c:set var="po" scope="session" value="${sessionScope.po}"/>
+	<c:set var="poitems" scope="session" value="${sessionScope.poitems}"/>
+	<div id="accountArea">
+			<ul style="list-style-type:none">
+			  <li>Shipping Address</li>
+			  <li>First name: ${po.getFname()}</li>
+			  <li>Last name: ${po.getLname()}</li>
+			  <li>Street: ${address.getStreet()}</li>
+			  <li>Province: ${address.getProvince()}</li>
+			  <li>Country: ${address.getCountry()}</li>
+			  <li>Zip: ${address.getZip()}</li>
+			  <li>Phone: ${address.getPhone()}</li>  
+			  <li>Status: ${po.getStatus()}</li>    
+			    
+			</ul>
+	</div>
+	
+	<div id="creditArea">
+		<label for="credit">credit card number</label>
+		<input id="credit" type="text"/>
+		<button id="pay">Pay</button>
+	</div>
+</body>
+</html>
+</jsp:root>

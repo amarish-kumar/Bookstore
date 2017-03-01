@@ -10,35 +10,14 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Insert title here</title>
+<title>Confirmation</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">;</script>
-<script type="text/javascript" src="res/req.js">;</script>
 </head>
 <body>
-	<div id="control">
-	  	
-	 
-	  	<div id="cartArea">
-	  		<label for="cart">Cart quantity</label>
-			<input id="cart" type="text" value="0" size="2"/>
-			<button id="checkout">Check out</button>
-	  	</div>
-	  	<br/>
-		<div id="searchArea">
-			<BUTTON id="searchButton">Search</BUTTON>
-			<input id="searchText" type="text" size="10"/><br/>
-		</div>
-		
-		<div id="catergories">
-			<BUTTON id="science">Science</BUTTON>
-			<BUTTON id="engineering">Engineering</BUTTON>
-			<BUTTON id="fiction">fiction</BUTTON>
-			<BUTTON id="all">all</BUTTON>
-			
-		</div>
-		
-		<div id="content"></div>
-		
+	<c:set var="po" scope="session" value="${sessionScope.po}"/>
+	<div id="content">
+		Thank you 
+		your order status: ${po.getStatus()}
 	</div>
 </body>
 </html>

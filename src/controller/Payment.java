@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.AccountModel;
 import model.Address;
 import model.Book;
 import model.BookstoreDAOImp;
@@ -31,7 +32,6 @@ public class Payment extends HttpServlet {
 	private static final String ORDERPROCESS = "OrderProcess.jspx";
 
 	private BookstoreDAOImp bookstore;
-	private List<POItem> poitems;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,7 +39,6 @@ public class Payment extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     	bookstore = new BookstoreDAOImp();
-    	poitems = new ArrayList<POItem>();
 
     }
 
@@ -69,6 +68,9 @@ public class Payment extends HttpServlet {
 			if(pass.equals(password))
 			{
 				int address = bookstore.getAccountAddress(login);
+				AccountModel account = bookstore.getAccount(login);
+				List<POItem> poitems = new ArrayList<POItem>();
+
 				String lname = bookstore.getLname(login);
 				String fname = bookstore.getFname(login);
 				PO po = new PO();
@@ -95,6 +97,7 @@ public class Payment extends HttpServlet {
 						poitems.add(poi);
 						
 					}
+					request.getSession().setAttribute("account", account);
 					request.getSession().setAttribute("address", addr);
 					request.getSession().setAttribute("po", po);
 					request.getSession().setAttribute("poitems", poitems);

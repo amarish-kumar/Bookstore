@@ -27,7 +27,7 @@ public class AccountDAO {
 	 	AccountModel account = new AccountModel();
 			try {
 				String query =   "SELECT *"
-				           + " FROM bookstore.Account"
+				           + " FROM Account"
 				           + " WHERE login=\'" 
 				           + login 
 				           + "\'";
@@ -49,6 +49,8 @@ public class AccountDAO {
 				}
 				answers.close();
 		    	p.close();
+		    	con.close();
+
 			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -61,7 +63,7 @@ public class AccountDAO {
 	    String pass = null;
 		try {
 			String query =  "SELECT pass"
-			           + " FROM bookstore.Account"
+			           + " FROM Account"
 			           + " WHERE login=\'" 
 			           + login 
 			           + "\'";
@@ -77,6 +79,7 @@ public class AccountDAO {
 	    	 
 	    	 answers.close();
 	    	 p.close();
+		     con.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -84,6 +87,57 @@ public class AccountDAO {
 		}
 		return pass;
 
+	}
+	
+	public void insertAccount(AccountModel acc) {
+	    
+	    try {
+			String  updateText =
+					"INSERT INTO Account (address, login, fname, lname, pass)"
+					           + " VALUES (" 
+					           + acc.getAddress() + ","
+					           + "\'" + acc.getLogin() + "\',"
+					    	   + "\'" + acc.getFname() + "\',"
+					    	   + "\'" + acc.getLname() + "\',"
+					    	   + "\'" + acc.getPass() + "\')";
+			Connection con = this.ds.getConnection();
+			PreparedStatement p = con.prepareStatement(updateText);
+			p.executeUpdate();
+			p.close();
+	    	con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public Integer getAccountAddress(String login) {
+		Integer id = null;
+		try {
+			String query =    "SELECT address"
+			           + " FROM Account"
+			           + " WHERE login=\'" 
+			           + login 
+			           + "\'";
+			Connection con = this.ds.getConnection();
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet answers = p.executeQuery();
+			if(answers.next())
+			{
+				String res = answers.getString("address");
+		        id = Integer.parseInt(res); 
+			}
+	        
+			answers.close();
+	    	p.close();
+	    	con.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
 	}
 	
 }

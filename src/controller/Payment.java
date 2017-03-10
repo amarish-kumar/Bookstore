@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.AccountModel;
 import bean.Address;
@@ -76,10 +79,11 @@ public class Payment extends HttpServlet {
 		String pass = accdao.getPassword(login);
 		Writer out = response.getWriter();
 		//out.write(pass + " " + password);
+		Date d = new Date();
 		if(pass != null){
 			if(pass.equals(password))
 			{
-				int address = bookstore.getAccountAddress(login);
+				int address = accdao.getAccountAddress(login);
 				AccountModel account = accdao.getAccount(login);
 				List<POItem> poitems = new ArrayList<POItem>();
 
@@ -89,12 +93,14 @@ public class Payment extends HttpServlet {
 				String fname = account.getFname();
 				PO po = new PO();
 				po.setLname(lname);
+				po.setMonth(Calendar.MONTH);
 				po.setFname(fname);
 				po.setAddress(address);
 				po.setStatus("ORDERED");
 				podao.insertPO(po);
-				int id = podao.getPOId(lname, fname, po.getStatus(), address);
+				int id = podao.getPOId2(po.getMonth(),lname, fname, po.getStatus(), address);
 				if(id > 0){
+					po.setId(id);
 					@SuppressWarnings("unchecked")
 					Map<Book,String> booklist = (Map<Book,String>) request.getSession().getAttribute("checkOutBookList");
 					Set<Book> ks = new HashSet<Book>(booklist.keySet());

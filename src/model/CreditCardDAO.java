@@ -27,7 +27,7 @@ public class CreditCardDAO {
 	 	CreditCard creditcard = new CreditCard();
 			try {
 				String query = "SELECT *"
-				           + " FROM bookstore.Creditcard"
+				           + " FROM Creditcard"
 				           + " WHERE num=" 
 				           + num;
 				Connection con = this.ds.getConnection();
@@ -45,6 +45,8 @@ public class CreditCardDAO {
 				 }
 				answers.close();
 		    	p.close();
+		    	con.close();
+
 			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

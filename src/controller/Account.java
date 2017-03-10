@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.AccountModel;
 import bean.Address;
+import model.AccountDAO;
 import model.AddressDAO;
 import model.BookstoreDAOImp;
 
@@ -23,6 +24,7 @@ public class Account extends HttpServlet {
 	private static final String ACCOUNT = "Account.jspx";
 	private BookstoreDAOImp bookstore;
 	private AddressDAO adao;
+	private AccountDAO accdao;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,6 +34,7 @@ public class Account extends HttpServlet {
         // TODO Auto-generated constructor stub
     	bookstore = new BookstoreDAOImp();
     	adao = new AddressDAO();
+    	accdao = new AccountDAO();
 
     }
 
@@ -77,7 +80,7 @@ public class Account extends HttpServlet {
 		account.setFname(fname);
 		account.setLname(lname);
 		account.setPass(pass);
-		bookstore.insertAccount(account);
+		accdao.insertAccount(account);
 		
 	}
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">;</script>
+<script type="text/javascript" src="res/admin.js">;</script>
+</head>
+<body>
+	<select id="selc">
+	  <option value="-1">Month</option>
+	  <option value="0">January</option>
+	  <option value="1">February</option>
+	  <option value="2">March</option>
+	  <option value="4">April</option>
+	  <option value="5">May</option>
+	  <option value="6">June</option>
+	  <option value="7">July</option>
+	  <option value="8">August</option>
+	  <option value="9">September</option>
+	  <option value="10">October</option>
+	  <option value="11">November</option>
+	  <option value="12">December</option>
+	  <option value="13">Popular</option>    
+	</select>
+	<button id="sub">Submit</button>
+	<div id="content"></div>
+</body>
+</html>
+</jsp:root>

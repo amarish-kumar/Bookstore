@@ -8,6 +8,7 @@ public class PO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
+	private int month;
 	private String lname;
 	private String fname;
 	private String status;
@@ -42,6 +43,12 @@ public class PO implements Serializable{
 	public void setAddress(int address) {
 		this.address = address;
 	}
+	public int getMonth() {
+		return month;
+	}
+	public void setMonth(int month) {
+		this.month = month;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -50,6 +57,7 @@ public class PO implements Serializable{
 		result = prime * result + ((fname == null) ? 0 : fname.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lname == null) ? 0 : lname.hashCode());
+		result = prime * result + month;
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -76,6 +84,8 @@ public class PO implements Serializable{
 				return false;
 		} else if (!lname.equals(other.lname))
 			return false;
+		if (month != other.month)
+			return false;
 		if (status == null) {
 			if (other.status != null)
 				return false;
@@ -85,9 +95,11 @@ public class PO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "PO [id=" + id + ", lname=" + lname + ", fname=" + fname + ", status=" + status + ", address=" + address
-				+ "]";
+		return "PO [id=" + id + ", month=" + month + ", lname=" + lname + ", fname=" + fname + ", status=" + status
+				+ ", address=" + address + "]";
 	}
+	
+	
 	
 	
 	

@@ -45,7 +45,7 @@ public class Start extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String query = request.getParameter("query");
+		//StringBuffer path = request.getRequestURL();
 //		String payment = request.getParameter("payment");
 		String reqtype = request.getParameter("reqtype");
 		if(reqtype != null && reqtype.equals("catalog")){
@@ -84,7 +84,7 @@ public class Start extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		String path = request.getContextPath();
 		Map<String,String[]> map = request.getParameterMap();
 		String reqtype = map.get("reqtype")[0];
 		if(reqtype.equals("checkout"))
@@ -112,15 +112,19 @@ public class Start extends HttpServlet {
 
 			}
 			request.getRequestDispatcher("/Checkout").forward(request, response);
+			//response.sendRedirect(path + "/Checkout");
 		}
 		else if(reqtype.equals("payment")){
 			request.getRequestDispatcher("/Payment").forward(request, response);
+			//response.sendRedirect(path + "/Payment");
 		}
 		else if(reqtype.equals("account")){
 			request.getRequestDispatcher("/Account").forward(request, response);
+			//response.sendRedirect(path + "/Account");
 		}
 		else if(reqtype.equals("confirm")){
-			request.getRequestDispatcher("/Confirm").forward(request, response);
+			//request.getRequestDispatcher("/Confirm").forward(request, response);
+			response.sendRedirect(path + "/Confirm");
 		}
 		
 		//System.out.println(name);

@@ -28,7 +28,7 @@ public class AddressDAO {
 		try {
 			String  updateText =
 			             "INSERT INTO Address (street, province, country, zip, phone)"
-			           + " VALUE (" 
+			           + " VALUES (" 
 			           + "\'" + add.getStreet() + "\',"
 			           + "\'" + add.getProvince() + "\',"
 			           + "\'" + add.getCountry() + "\',"
@@ -38,6 +38,8 @@ public class AddressDAO {
 			PreparedStatement p = con.prepareStatement(updateText);
 			p.executeUpdate();
 			p.close();
+	    	con.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,7 +51,7 @@ public class AddressDAO {
 		Integer id = null;
 		try {
 			String query =   "SELECT id"
-			           + " FROM bookstore.Address"
+			           + " FROM Address"
 			           + " WHERE street=\'" 
 			           + street 
 			           + "\'"
@@ -73,6 +75,8 @@ public class AddressDAO {
 	        id = Integer.parseInt(res); 
 			answers.close();
 	    	p.close();
+	    	con.close();
+
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -85,7 +89,7 @@ public class AddressDAO {
 	   	Address address = new Address();
 		try {
 			String query =  "SELECT *"
-			           + " FROM bookstore.Address"
+			           + " FROM Address"
 			           + " WHERE id="
 			           + id;
 			Connection con = this.ds.getConnection();
@@ -112,6 +116,8 @@ public class AddressDAO {
 			
 			answers.close();
 	    	p.close();
+	    	con.close();
+
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -14,6 +14,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import bean.Book;
+import bean.PO;
 
 
 
@@ -57,6 +58,8 @@ public class BookDAO {
 			 }
 			answers.close();
 	    	p.close();
+	    	con.close();
+
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -93,6 +96,8 @@ public class BookDAO {
    	 
    	 	r.close();
    	 	p.close();
+    	con.close();
+
 
 		return book;
 		
@@ -104,7 +109,7 @@ public class BookDAO {
 		    try {
 
 				String query =  "SELECT *"
-				           + " FROM bookstore.Book"
+				           + " FROM Book"
 				           + " WHERE category=\'" 
 				           + c 
 				           + "\'";
@@ -129,6 +134,8 @@ public class BookDAO {
 				 }
 				answers.close();
 		    	p.close();
+		    	con.close();
+
 			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -138,5 +145,81 @@ public class BookDAO {
 		    
 			return books;	
 	
+	}
+	
+	public void updateBook(Book b, Integer quan) {
+		try {
+			Integer newquan = b.getQuan() - quan;
+			PreparedStatement p = null;
+			Connection con = this.ds.getConnection();
+			String  updateText = null;
+			
+			if(newquan > 0){
+				updateText = "UPDATE BOOK"
+						   + " SET quan="
+				 		   +  newquan
+				           + " WHERE bid=" 
+				           + "\'" + b.getBid() + "\'";
+			}
+			else{
+				updateText = "DELETE FROM BOOK"
+				           + " WHERE bid=" 
+				           + "\'" + b.getBid() + "\'";
+			}
+			p = con.prepareStatement(updateText);
+			p.executeUpdate();
+			p.close();
+	    	con.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	
+	}
+	
+	public List<Book> getBookSoldByMonth(int m){
+		List<Book> books = new ArrayList<Book>();
+
+	    try {
+
+			String query =  "SELECT b.bid, b.title, b.category, b.price, poi.quan"
+			           + " FROM PO p, POItem poi, Book b"
+			           + " WHERE p.month=" 
+			           + m 
+			           + " and p.id = poi.id"
+			           + " and poi.bid = b.bid";
+			Connection con = this.ds.getConnection();
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet answers = p.executeQuery();
+			while (answers.next()) {
+				 Book book = new Book();
+			     String bid = answers.getString("bid");
+			     String title = answers.getString("title");
+			     String price = answers.getString("price");
+			     String catergory = answers.getString("category");
+			     int quan = Integer.parseInt(answers.getString("quan"));
+			     book.setBid(bid);
+			     book.setTitle(title);
+			     book.setPrice(Integer.parseInt(price));
+			     book.setCatergory(catergory);
+			     book.setQuan(quan);
+			     books.add(book);
+			 	
+			     
+			 }
+			answers.close();
+	    	p.close();
+	    	con.close();
+
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	 
+	    
+		return books;
 	}
 }

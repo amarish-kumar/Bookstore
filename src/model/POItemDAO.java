@@ -25,7 +25,7 @@ public class POItemDAO {
 		try {
 			String  updateText =
 					  "INSERT INTO POItem (id, bid, quan, price)"
-					           + " VALUE (" 
+					           + " VALUES (" 
 					           + poi.getId() + ","
 					    	   + "\'" + poi.getBid() + "\',"
 					    	   + poi.getQuan() + ","
@@ -34,6 +34,8 @@ public class POItemDAO {
 			PreparedStatement p = con.prepareStatement(updateText);
 			p.executeUpdate();
 			p.close();
+	    	con.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

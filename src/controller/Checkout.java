@@ -26,7 +26,7 @@ import model.Calculation;
 @WebServlet("/Checkout")
 public class Checkout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String CHECKOUT = "Checkout.jspx";
+	private static final String CHECKOUT = "/Checkout.jspx";
 	//private List<Book> checkOutBookList;
 //	private Map<Book,String> checkOutBookList;
 //	private BookstoreDAOImp bookstore;
@@ -52,6 +52,13 @@ public class Checkout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.setContentType("text/html");
+//		String path = request.getContextPath();
+//		request.getRequestDispatcher(CHECKOUT).forward(request, response);
+		//response.sendRedirect(path + CHECKOUT);
+
+
+		
 	}
 
 	/**
@@ -60,6 +67,7 @@ public class Checkout extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	/*
+		
 		Map<String,String[]> map = request.getParameterMap();
 		
 		if(!map.isEmpty()){
@@ -90,6 +98,7 @@ public class Checkout extends HttpServlet {
 //			item.setBid(b.getBid());
 //			
 //		}
+		response.setContentType("text/html");
 		request.getRequestDispatcher(CHECKOUT).forward(request, response);
 	
 	}

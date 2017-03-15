@@ -35,8 +35,10 @@ import model.POItemDAO;
 @WebServlet("/Payment")
 public class Payment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String PAYMENT = "Payment.jspx";
-	private static final String ORDERPROCESS = "OrderProcess.jspx";
+	private static final String LOGIN = "/WEB-INF/responses/Login.jspx";
+	//private static final String ORDERPROCESS = "OrderProcess1.jspx";
+	private static final String CONFIRM =  "/WEB-INF/responses/Confirm.jspx";
+
 
 	private BookstoreDAOImp bookstore;
 	private AddressDAO adao;
@@ -63,7 +65,7 @@ public class Payment extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher(PAYMENT).forward(request, response);
+		request.getRequestDispatcher(LOGIN).forward(request, response);
 
 	}
 
@@ -121,7 +123,7 @@ public class Payment extends HttpServlet {
 					request.getSession().setAttribute("address", addr);
 					request.getSession().setAttribute("po", po);
 					request.getSession().setAttribute("poitems", poitems);
-					request.getRequestDispatcher(ORDERPROCESS).forward(request, response);
+					request.getRequestDispatcher(CONFIRM).forward(request, response);
 				}
 				else{
 					out.write("order not gone through");

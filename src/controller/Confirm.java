@@ -26,7 +26,8 @@ import model.PODAO;
 @WebServlet("/Confirm")
 public class Confirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String CONFIRM = "Confirm.jspx";
+	private static final String PAYMENT = "/WEB-INF/responses/Payment.jspx";
+	//private static final String CONFIRM = "Confirm1.jspx";
 	private static final String VERIFIED = "Verified.jspx";
 
 	private BookstoreDAOImp bookstore;
@@ -49,7 +50,7 @@ public class Confirm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher(CONFIRM).forward(request, response);
+		request.getRequestDispatcher(PAYMENT).forward(request, response);
 
 	}
 
@@ -81,7 +82,7 @@ public class Confirm extends HttpServlet {
 		}
 		else{
 			//out.write("invalid creditcard");
-			request.getRequestDispatcher(CONFIRM).forward(request, response);
+			request.getRequestDispatcher(PAYMENT).forward(request, response);
 		}
 		
 	}

@@ -5,27 +5,27 @@
 $(document).ready(function(){
 	var map = {};
     $("#all").click(function(){
-        $.get("/4413project/Start/?reqtype=catalog&query=All",
+        $.get(path + "?reqtype=catalog&query=All",
         function(data,status){
         	$("#content").html($(data).find("data").html());
         });
     });
     
     $("#science").click(function(){
-        $.get("/4413project/Start/?reqtype=catalog&query=Science",
+        $.get(path + "?reqtype=catalog&query=Science",
         function(data,status){
         	$("#content").html($(data).find("data").html());
         });
     });
     
     $("#engineering").click(function(){
-    	$.get("/4413project/Start/?reqtype=catalog&query=Engineering",
+    	$.get(path + "?reqtype=catalog&query=Engineering",
         function(data,status){
         	$("#content").html($(data).find("data").html());
         });
     });
     $("#fiction").click(function(){
-        $.get("/4413project/Start/?reqtype=catalog&query=Fiction",
+        $.get(path + "?reqtype=catalog&query=Fiction",
         function(data,status){
         	$("#content").html($(data).find("data").html());
         });
@@ -33,7 +33,7 @@ $(document).ready(function(){
     
     $("#checkout").click(function(){
     	map["reqtype"] = "checkout";
-        $.post("/4413project/Start/",
+        $.post(path,
         map,
         function(data, status){
 //        	document.open();
@@ -88,7 +88,7 @@ $(document).ready(function(){
     	if(curQuan > 0){
         	map2["reqtype"] = "checkout";
     		map2[key] = quan;
-        	$.post("/4413project/Start/",
+        	$.post(path,
         		    map2,
         		   function(data, status){
         		            //alert("Data: " + data + "\nStatus: " + status);
@@ -119,7 +119,7 @@ $(document).ready(function(){
         	var quan = $(".quan").eq($(this).attr("value")).text();
         	map2["reqtype"] = "checkout";
         	map2[key] = quan;
-        	$.post("/4413project/Start/",
+        	$.post(path,
         		    map2,
         		   function(data, status){
         		            //alert("Data: " + data + "\nStatus: " + status);
@@ -142,7 +142,7 @@ $(document).ready(function(){
     	var key = $(this).attr("name");
     	map2["reqtype"] = "checkout";
     	map2[key] = 0;
-    	$.post("/4413project/Start/",
+    	$.post(path,
     		    map2,
     		   function(data, status){
 //    		         
@@ -157,7 +157,7 @@ $(document).ready(function(){
     });
 	
 	$(document).on('click', '#payment', function() {
-		 $.get("/4413project/Start/?reqtype=payment",
+		 $.get(path + "?reqtype=payment",
 			        function(data,status){
 //					 document.open();
 //		             document.write(data);
@@ -172,24 +172,25 @@ $(document).ready(function(){
 //	login area js
 	var map3 = {};
 	$(document).on('click', '#sub', function(){
-    	map3["reqtype"] = "payment";
+    	map3["reqtype"] = "login";
     	map3["login"] = $("#log").val();
     	map3["password"] = $("#pass").val();
-        $.post("/4413project/Start/",
+        $.post(path,
         map3,
         function(data, status){
 //        	document.open();
 //            document.write(data);
 //            document.close();
         	//alert(data);
-			$("body").html($(data).find("data").html());
+        	$("#login-area").empty();
+			$("#login-area").html($(data).find("data").html());
 
         });
     });
     
 
 	$(document).on('click', '#acc', function(){
-        $.get("/4413project/Start/?reqtype=account",
+        $.get(path + "?reqtype=account",
         function(data, status){
         	//alert(data);
 //        	document.open();
@@ -202,7 +203,7 @@ $(document).ready(function(){
     
 //    confirmation area
 	$(document).on('click', '#confirm', function(){
-        $.get("/4413project/Start/?reqtype=confirm",
+        $.get(path + "?reqtype=confirm",
         function(data, status){
         	//alert(data);
 //        	document.open();
@@ -219,8 +220,8 @@ $(document).ready(function(){
       $(document).on('click', '#pay', function(){
 	    	
 	    	map4["reqtype"] = "confirm";
-	    	map4["creditcard"] = $("#credit").val();
-	        $.post("/4413project/Confirm",
+	    	map4["creditcard"] = $("#car_number").val();
+	        $.post(path2,
 	        map4,
 	        function(data, status){
 //	        	document.open();

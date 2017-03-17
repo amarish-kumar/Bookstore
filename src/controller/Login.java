@@ -28,7 +28,7 @@ import model.Calculation;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BookstoreDAOImp bookstore;
-	private static final String LOGIN = "/WEB-INF/xml/Login.jspx";
+	private static final String LOGIN = "/WEB-INF/responses/User.jspx";
 	private AccountDAO accdao;
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,7 +58,7 @@ public class Login extends HttpServlet {
 		Map<String,String[]> map = request.getParameterMap();
 		String login = map.get("login")[0];
 		String password = map.get("password")[0];
-		String pass = bookstore.getPassword(login);
+		String pass = accdao.getPassword(login);
 		Writer out = response.getWriter();
 		//out.write(pass + " " + password);
 		if(pass != null){

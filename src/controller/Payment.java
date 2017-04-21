@@ -17,17 +17,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.AccountDAO;
+import DAO.AddressDAO;
+import DAO.BookstoreDAOImp;
+import DAO.PODAO;
+import DAO.POItemDAO;
 import bean.AccountModel;
 import bean.Address;
 import bean.Book;
 import bean.PO;
 import bean.POItem;
-import model.AccountDAO;
-import model.AddressDAO;
-import model.BookstoreDAOImp;
 import model.Calculation;
-import model.PODAO;
-import model.POItemDAO;
+import model.Encryption;
+import service.CustomerInfo;
+import service.POInfo;
 
 /**
  * Servlet implementation class Payment
@@ -63,30 +66,30 @@ public class Payment extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher(LOGIN).forward(request, response);
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		Map<String,String[]> map = request.getParameterMap();
-		String login = map.get("login")[0];
-		String password = map.get("password")[0];
-		String pass = accdao.getPassword(login);
-		Writer out = response.getWriter();
-		//out.write(pass + " " + password);
-		Date d = new Date();
-		if(pass != null){
-			if(pass.equals(password))
+		
+		try {
+			response.setContentType("text/xml");
+			POInfo POINFO = (POInfo) this.getServletContext().getAttribute("POINFO");
+			String url= this.getServletContext().getContextPath() + "/Start" ;
+			String clientUrl = request.getRequestURI();
+			String reqtype = request.getParameter("reqtype");
+			
+			if(!clientUrl.endsWith("/Start") && reqtype == null)
 			{
-				int address = accdao.getAccountAddress(login);
-				AccountModel account = accdao.getAccount(login);
+				response.sendRedirect(url);
+				return;
+			}
+			
+			Boolean login = (Boolean) request.getSession().getAttribute("login");
+			if(login.equals(Boolean.FALSE)){
+				request.getRequestDispatcher(LOGIN).forward(request, response);
+
+			}
+			else{
+				Writer out = response.getWriter();
+				
+				//int address = accdao.getAccountAddress(login);
+				AccountModel account = (AccountModel) request.getSession().getAttribute("account");
 				List<POItem> poitems = new ArrayList<POItem>();
 
 //				String lname = bookstore.getLname(login);
@@ -97,16 +100,17 @@ public class Payment extends HttpServlet {
 				po.setLname(lname);
 				po.setMonth(Calendar.MONTH);
 				po.setFname(fname);
-				po.setAddress(address);
+				po.setAddress(account.getAddress());
 				po.setStatus("ORDERED");
-				podao.insertPO(po);
-				int id = podao.getPOId2(po.getMonth(),lname, fname, po.getStatus(), address);
+				//podao.insertPO(po);
+				POINFO.insertPO(po);
+				int id = podao.getPOId2(po.getMonth(),lname, fname, po.getStatus(),account.getAddress());
 				if(id > 0){
 					po.setId(id);
 					@SuppressWarnings("unchecked")
 					Map<Book,String> booklist = (Map<Book,String>) request.getSession().getAttribute("checkOutBookList");
 					Set<Book> ks = new HashSet<Book>(booklist.keySet());
-					Address addr = adao.getAddress(address);
+					Address addr = adao.getAddress(account.getAddress());
 					for(Book b : ks){
 						POItem poi = new POItem();
 						int quan = Integer.parseInt(booklist.get(b));
@@ -115,7 +119,8 @@ public class Payment extends HttpServlet {
 						poi.setBid(b.getBid());
 						poi.setQuan(quan);
 						poi.setPrice(price);
-						poidao.insertPOItem(poi);
+						//poidao.insertPOItem(poi);
+						POINFO.insertPOItem(poi);
 						poitems.add(poi);
 						
 					}
@@ -129,18 +134,101 @@ public class Payment extends HttpServlet {
 					out.write("order not gone through");
 				}
 
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		//request.getRequestDispatcher(LOGIN).forward(request, response);
 
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {		
+			response.setContentType("text/xml");
+			POInfo POINFO = (POInfo) this.getServletContext().getAttribute("POINFO");
+			CustomerInfo CUSTOMERINFO = (CustomerInfo) this.getServletContext().getAttribute("CUSTOMERINFO");
+			Map<String,String[]> map = request.getParameterMap();
+			String login = map.get("login")[0];
+			String password = map.get("password")[0];
+			String encryptedPass = Encryption.encrypt(password);
+			String pass = CUSTOMERINFO.getPassword(login);
+			Writer out = response.getWriter();
+			//out.write(pass + " " + password);
+			Date d = new Date();
+			if(pass != null){
+				if(pass.equals(encryptedPass))
+				{
+					int address = accdao.getAccountAddress(login);
+					AccountModel account = accdao.getAccount(login);
+					List<POItem> poitems = new ArrayList<POItem>();
+
+//					String lname = bookstore.getLname(login);
+//					String fname = bookstore.getFname(login);
+					String lname = account.getLname();
+					String fname = account.getFname();
+					PO po = new PO();
+					po.setLname(lname);
+					po.setMonth(Calendar.MONTH);
+					po.setFname(fname);
+					po.setAddress(address);
+					po.setStatus("ORDERED");
+					//podao.insertPO(po);
+					POINFO.insertPO(po);
+					int id = podao.getPOId2(po.getMonth(),lname, fname, po.getStatus(), address);
+					if(id > 0){
+						po.setId(id);
+						@SuppressWarnings("unchecked")
+						Map<Book,String> booklist = (Map<Book,String>) request.getSession().getAttribute("checkOutBookList");
+						Set<Book> ks = new HashSet<Book>(booklist.keySet());
+						Address addr = adao.getAddress(address);
+						for(Book b : ks){
+							POItem poi = new POItem();
+							int quan = Integer.parseInt(booklist.get(b));
+							int price = Calculation.calculateCost(b, quan);
+							poi.setId(id);
+							poi.setBid(b.getBid());
+							poi.setQuan(quan);
+							poi.setPrice(price);
+							//poidao.insertPOItem(poi);
+							POINFO.insertPOItem(poi);
+							poitems.add(poi);
+							
+						}
+						request.getSession().setAttribute("login",Boolean.TRUE);
+						request.getSession().setAttribute("account", account);
+						request.getSession().setAttribute("address", addr);
+						request.getSession().setAttribute("po", po);
+						request.getSession().setAttribute("poitems", poitems);
+						request.getRequestDispatcher(CONFIRM).forward(request, response);
+					}
+					else{
+						out.write("order not gone through");
+					}
+
+
+				}
+				else
+				{
+					out.write("wrong password");
+				}
 			}
 			else
 			{
-				out.write("wrong password");
+				out.write("create new account");
 			}
+			out.flush();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else
-		{
-			out.write("create new account");
-		}
-		out.flush();
+		
 		
 		
 

@@ -11,6 +11,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Insert title here</title>
+<link rel="StyleSheet" href="${pageContext.request.contextPath}/res/css/main.css" type="text/css" title="project" media="screen, print"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">;</script>
 <script type="text/javascript" src="res/req.js">;</script>
 

@@ -11,9 +11,45 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 </head>
-<data>
-	<c:set var="acc" scope="session" value="${sessionScope.account}"/>	
-	<li class="navbar-text">Welcome back ${acc.getLogin()}</li>
+<data> 	
+	<c:set var="log" scope="session" value="${sessionScope.login}"/>		
+	<input id="logStatus" type="hidden" value="${log}"/>
+	<c:choose>
+		<c:when test="${log == true}">
+			<c:set var="acc" scope="session" value="${sessionScope.account}"/>	
+	     	<li class="navbar-text">Welcome back ${acc.getLogin()}</li>
+			<li class="navbar-text"><button id="logout" class="btn btn-sm btn-primary btn-block">log-out</button></li>     
+	    </c:when>
+	    <c:otherwise>
+	    	<li><p class="navbar-text">Already have an account?</p></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+					<ul id="login-dp" class="dropdown-menu">
+						<li>
+							 <div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											 <label class="sr-only" for="log">Email address</label>
+											 <input type="text" class="form-control" id="log" placeholder="Username"/>
+										</div>
+										<div class="form-group">
+											 <label class="sr-only" for="pass">Password</label>
+											 <input type="password" class="form-control" id="pass" placeholder="Password"/>
+										</div>
+										<div class="form-group">
+											 <button id="sub" class="btn btn-primary btn-block">Sign in</button>
+										</div>
+	
+									</div>
+									<div class="bottom text-center">
+										Open an Account <button id="acc" class="btn btn-sm btn-primary"><b>Join Us</b></button>		
+									</div>
+							 </div>
+						</li>
+					</ul>
+       			</li>
+		</c:otherwise>
+	</c:choose>
 </data>
 </html>
 </jsp:root>

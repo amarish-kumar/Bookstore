@@ -14,8 +14,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.PODAO;
 import bean.PO;
-import model.PODAO;
 
 /**
  * Servlet Filter implementation class CardCheck
@@ -52,7 +52,6 @@ public class CardCheck implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		Writer out = resp.getWriter();
 		resp.setContentType("text/html");
 		Integer cc = (Integer) req.getSession().getAttribute("creditcheck");
 		if(cc == null)
@@ -62,13 +61,12 @@ public class CardCheck implements Filter {
 			
 		}
 		else{
-//			Object num = cc;
-//			Integer cc1 = 0;
-			if(cc > 3){
+			if(cc >= 3){
 				PO po = (PO) req.getSession().getAttribute("po");
 				po.setStatus("DENIED");
 				podao.updatePO(po);
-				out.write("Invalid Credit card");
+				request.getRequestDispatcher("/WEB-INF/responses/OrderDenied.jspx").forward(request,response);
+				//out.write("Invalid Credit card");
 				
 			}
 			else

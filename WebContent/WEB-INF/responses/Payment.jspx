@@ -29,7 +29,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
                                     </select>
                                 </div>
                                 <div class="col-md-6"><strong>Credit Card Number:</strong></div>
-                                <div class="col-md-6"><input type="text" class="form-control" name="car_number" value="" /></div>
+                                <div class="col-md-6"><input id="car_number" type="text" class="form-control"/></div>
                                 <div class="col-md-6"><strong>Card CVV:</strong></div>
                                 <div class="col-md-6"><input type="text" class="form-control" name="car_code" value="" /></div>
                                 <div class="col-md-6">
@@ -71,6 +71,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
                                 
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <button id="pay" type="submit" class="btn btn-primary btn-submit-fix">Place order</button>
+                                    <p id="error" style="display: none">Please log in</p>
                                 </div>
                             </div>
                             

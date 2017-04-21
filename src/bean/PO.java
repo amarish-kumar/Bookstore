@@ -13,47 +13,100 @@ public class PO implements Serializable{
 	private String fname;
 	private String status;
 	private int address;
+	private String day;
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getLname() {
-		return lname;
-	}
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
-	public String getFname() {
-		return fname;
-	}
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public int getAddress() {
-		return address;
-	}
-	public void setAddress(int address) {
-		this.address = address;
-	}
+	/**
+	 * @return the month
+	 */
 	public int getMonth() {
 		return month;
 	}
+	/**
+	 * @param month the month to set
+	 */
 	public void setMonth(int month) {
 		this.month = month;
 	}
+	/**
+	 * @return the lname
+	 */
+	public String getLname() {
+		return lname;
+	}
+	/**
+	 * @param lname the lname to set
+	 */
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+	/**
+	 * @return the fname
+	 */
+	public String getFname() {
+		return fname;
+	}
+	/**
+	 * @param fname the fname to set
+	 */
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	/**
+	 * @return the address
+	 */
+	public int getAddress() {
+		return address;
+	}
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(int address) {
+		this.address = address;
+	}
+	/**
+	 * @return the day
+	 */
+	public String getDay() {
+		return day;
+	}
+	/**
+	 * @param day the day to set
+	 */
+	public void setDay(String day) {
+		this.day = day;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + address;
+		result = prime * result + ((day == null) ? 0 : day.hashCode());
 		result = prime * result + ((fname == null) ? 0 : fname.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lname == null) ? 0 : lname.hashCode());
@@ -61,6 +114,9 @@ public class PO implements Serializable{
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -71,6 +127,11 @@ public class PO implements Serializable{
 			return false;
 		PO other = (PO) obj;
 		if (address != other.address)
+			return false;
+		if (day == null) {
+			if (other.day != null)
+				return false;
+		} else if (!day.equals(other.day))
 			return false;
 		if (fname == null) {
 			if (other.fname != null)
@@ -93,11 +154,15 @@ public class PO implements Serializable{
 			return false;
 		return true;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "PO [id=" + id + ", month=" + month + ", lname=" + lname + ", fname=" + fname + ", status=" + status
-				+ ", address=" + address + "]";
+				+ ", address=" + address + ", day=" + day + "]";
 	}
+	
 	
 	
 	

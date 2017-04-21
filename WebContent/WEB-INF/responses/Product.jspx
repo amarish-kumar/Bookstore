@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/xml; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="data"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Insert title here</title>
+</head>
+<data>
+<c:set var="books" scope="session" value="${sessionScope.bookList}"/>
+<c:set var="path" value="${pageContext.request.contextPath}/pictures"/>
+
+	<c:choose>
+		<c:when test="${empty books}">
+	     	no books found        
+	    </c:when>
+	    <c:otherwise>
+    		<c:forEach var="i" begin="0" end="${books.size()-1}">
+			 <div class="col-sm-4 col-lg-4 col-md-4">
+                       <div class="thumbnail">
+                           <img src="${path}/${books[i].getBid()}.jpg" alt="${books[i].getBid()}"/>
+                           <div class="caption">
+                               <h4 class="pull-right">$${books[i].getPrice()}</h4>
+                               <h4>${books[i].getTitle()}</h4>
+                               <h4>Quantity: ${books[i].getQuan()}</h4>
+                               <h4>Catergory: ${books[i].getCatergory()}</h4>
+                           </div>
+                           <div class="ratings">
+                               <p class="pull-right"><button name="bid" value="${books[i].getBid()}" class="review">Reviews</button></p>
+                               <p>
+                                   <span class="glyphicon glyphicon-star"></span>
+                                   <span class="glyphicon glyphicon-star"></span>
+                                   <span class="glyphicon glyphicon-star"></span>
+                                   <span class="glyphicon glyphicon-star"></span>
+                                   <span class="glyphicon glyphicon-star"></span>
+                               </p>
+                           </div>
+                           <input class="input-sm addQuan" type="text" value="0" size="2"/>
+                           <button class="btn btn-primary btn-sm btn-block addCart" name="${books[i].getBid()}" value="${i}">Add</button>
+                       </div>
+                   </div>
+			</c:forEach>
+	    </c:otherwise>
+	</c:choose>		
+		
+</data>
+</html>
+</jsp:root>

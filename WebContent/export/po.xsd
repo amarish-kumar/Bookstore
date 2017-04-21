@@ -1,0 +1,64 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+ <xsd:element name="purchaseOrderReport" type="purchaseReportType"/>
+
+  <xsd:complexType name="purchaseReportType">
+	 <xsd:sequence>
+	   <xsd:element name="purchaseOrder" minOccurs="0" maxOccurs="unbounded" type="PurchaseOrderType"/>
+	 </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="purchaseOrder" type="PurchaseOrderType"/>
+	 
+  <xsd:complexType name="PurchaseOrderType">
+    <xsd:sequence>
+      <xsd:element name="customerName" type="xsd:string"/>
+       <xsd:element name="shipTo" type="AddressType"/>
+       <xsd:element name="item" minOccurs="0" maxOccurs="unbounded" type="Item"/>
+    </xsd:sequence>
+    <xsd:attribute name="orderDate" type="xsd:string"/>
+  </xsd:complexType>
+	
+   <xsd:complexType name="Item">
+    <xsd:sequence>   
+      <xsd:element name="productName" type="xsd:string"/>
+       <xsd:element name="quantity"  type="xsd:positiveInteger"/>
+       <xsd:element name="price"  type="xsd:positiveInteger"/>
+    </xsd:sequence>
+    <xsd:attribute name="bid" type="xsd:string" use="required"/>
+  </xsd:complexType>
+	
+  <xsd:complexType name="AddressType">
+    <xsd:sequence>   
+      <xsd:element name="street" type="xsd:string"/>
+      <xsd:element name="province"  type="xsd:string"/>
+      <xsd:element name="zip"    type="xsd:string"/>
+      <xsd:element name="phone"  type="xsd:string"/>
+    </xsd:sequence>
+     <xsd:attribute name="id" type="xsd:positiveInteger"/>
+    <xsd:attribute name="country" type="xsd:string"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="Items">
+    <xsd:sequence>
+      <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="productName" type="xsd:string"/>
+            <xsd:element name="quantity">
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:positiveInteger">
+                  <xsd:maxExclusive value="100"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="price"  type="xsd:positiveInteger"/>
+          </xsd:sequence>
+          <xsd:attribute name="bid" type="xsd:string" use="required"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+</xsd:schema>

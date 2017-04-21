@@ -33,9 +33,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 											<h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
 										</div>
 										<div class="col-xs-6">
-											<button type="button" class="btn btn-primary btn-sm btn-block">
-												<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
-											</button>
+											<span class="glyphicon glyphicon-share-alt"></span><a href="">Continue Shopping</a>
 										</div>
 									</div>
 								</div>

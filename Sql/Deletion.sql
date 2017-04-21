@@ -1,0 +1,8 @@
+DROP TABLE BookSearch;
+DROP TABLE Review;
+DROP TABLE POItem;
+DROP TABLE PO;
+DROP TABLE Account;
+DROP TABLE Address;
+DROP TABLE Book;
+DROP TABLE Creditcard;

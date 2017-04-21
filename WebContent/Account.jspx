@@ -10,35 +10,10 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Account creation</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">;</script>
-<script type="text/javascript" src="res/account.js">;</script>
+<title>Account created</title>
 </head>
 <body>
-	<form id="userform" action='' method='POST'>
-		<legend>New user creation</legend>
-			<fieldset>
-				<label for="login">Login</label>
-				<input id="login" name="login" type="text"/><div id="e1"></div><br/>
-				<label for="password">Password</label>
-				<input id="password" name="password" type="text"/><div id="e2"></div><br/>
-				<label for="fname">First Name</label>
-				<input id="fname" name="fname" type="text"/><div id="e3"></div><br/>
-				<label for="lname">Last Name</label>
-				<input id="lname" name="lname" type="text"/><div id="e4"></div><br/>
-				<label for="street">Street</label>
-				<input id="street" name="street" type="text"/><div id="e5"></div><br/>
-				<label for="province">Province</label>
-				<input id="province" name="province" type="text"/><div id="e6"></div><br/>
-				<label for="country">Country</label>
-				<input id="country" name="country" type="text"/><div id="e7"></div><br/>
-				<label for="zip">Zip</label>
-				<input id="zip" name="zip" type="text"/><div id="e8"></div><br/>
-				<label for="phone">Phone</label>
-				<input id="phone" name="phone" type="text"/><div id="e9"></div><br/>
-				<input type="submit" name="submit" value="submit"/>
-			</fieldset>
-	</form>
+	<p><b>Thank you, your account have been created </b><a href="">Back to main page</a></p>
 </body>
 </html>
 </jsp:root>

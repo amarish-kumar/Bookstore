@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/xml; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="data"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+	<data>
+		<title>Account Registration Page</title>
+		<div class="container-acc container">
+	    <h1 class="well">Account Registration Form</h1>
+			<div class="col-lg-12 well">
+				<div class="row">
+					<form id="userform" action='' method='POST'>
+						<input name="reqtype" value="account" type="hidden" />	
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<label>First Name</label>
+									<input name="fname" type="text" placeholder="Enter First Name Here.." class="form-control"/>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Last Name</label>
+									<input name="lname" type="text" placeholder="Enter Last Name Here.." class="form-control"/>
+								</div>
+							</div>					
+							<div class="form-group">
+								<label>Address</label>
+								<textarea name="street" placeholder="Enter Address Here.." rows="3" class="form-control"></textarea>
+							</div>	
+							<div class="row">	
+								<div class="col-sm-4 form-group">
+									<label>Province</label>
+									<input name="province" type="text" placeholder="Enter Province Name Here.." class="form-control"/>
+								</div>	
+								<div class="col-sm-4 form-group">
+									<label>Zip</label>
+									<input name="zip" type="text" placeholder="Enter Zip Code Here.." class="form-control"/>
+								</div>
+								<div class="col-sm-4 form-group">
+									<label>Country</label>
+									<input name="country" type="text" placeholder="Enter Country Here.." class="form-control"/>
+								</div>			
+							</div>
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<label>Login name</label>
+									<input name="login" type="text" placeholder="Enter Login name Here.." class="form-control"/>
+								</div>		
+								<div class="col-sm-6 form-group">
+									<label>Password</label>
+									<input name="password" type="password" placeholder="Enter Password Name Here.." class="form-control"/>
+								</div>	
+							</div>						
+							<div class="form-group">
+								<label>Phone Number</label>
+								<input name="phone" type="text" placeholder="Enter Phone Number Here.." class="form-control"/>
+							</div>		
+							<button type="submit" name="submit" value="submit" class="btn btn-lg btn-info">Submit</button>					
+						</div>
+					</form> 
+				</div>
+			</div>
+		</div>
+	</data>
+</html>
+</jsp:root>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+    <title>Shop Homepage</title> 
+   	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/res/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/res/css/op.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/res/css/login.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">;</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">;</script>
+    <script type="text/javascript" src="res/js/main.js">;</script>
+    
+
+</head>
+
+<body>
+	  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Justin's Book Store</a>
+            </div>
+            
+            <div class="navbar-form navbar-right">
+		      <button id="checkout" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span>Checkout  <input id="cart" class="form-control input-sm" type="text" value="0" size="1" readonly="readonly"/></button>	
+		    </div>
+           
+            <div class="navbar-form navbar-left">
+		      <div class="form-group">
+		        <input type="text" class="form-control" placeholder="Search"/>
+		      </div>
+		      <button type="submit" class="btn btn-default">Submit</button>
+		    </div>
+	        
+ 		</div>
+    </nav>
+    
+        <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">Catergories</p>
+                <div class="list-group">
+                    <button id="all" class="list-group-item">All</button>
+                    <button id="engineering" class="list-group-item">Engineering</button>
+                    <button id="science" class="list-group-item">Science</button>
+                    <button id="fiction" class="list-group-item">Fiction</button>
+                    
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt=""/>
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt=""/>
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt=""/>
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="content" class="row">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
+</jsp:root>

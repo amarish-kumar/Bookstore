@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/xml; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="data"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<data>
+	<title>Login Page</title>
+	<div class = "container">
+		<div class="wrapper">
+			<div class="form-signin">       
+			    <h3 class="form-signin-heading">Please Sign In</h3>				  
+				  <input id="log-main" type="text" class="form-control" name="Username" placeholder="Username" required="" autofocus="" />
+				  <input id="pass-main" type="password" class="form-control" name="Password" placeholder="Password" required=""/>     		  
+				  <button id="sub-main" class="btn btn-lg btn-primary btn-block">Login</button>  			
+			</div>			
+		</div>
+	</div>
+	<div id="content"></div>
+</data>
+</html>
+</jsp:root>

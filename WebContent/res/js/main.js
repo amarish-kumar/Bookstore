@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function(){
+	
 	var map = {};
     $("#all").click(function(){
         $.get(path + "?reqtype=catalog&query=All",
@@ -36,10 +37,7 @@ $(document).ready(function(){
         $.post(path,
         map,
         function(data, status){
-//        	document.open();
-//            document.write(data);
-//            document.close();
-        	$("body").html($(data).find("data").html());
+        	$("#page-content").html($(data).find("data").html());
         });
     });
     
@@ -75,6 +73,8 @@ $(document).ready(function(){
     	$("#cart").val(total);
     }
     
+    
+    
 //    checkout area js
     var map2 = {};
     $(document).on('click', '.add', function() {
@@ -96,7 +96,7 @@ $(document).ready(function(){
 //    		    		 document.open();
 //    		             document.write(data);
 //    		             document.close();
-            			$("body").html($(data).find("data").html());
+            			$("#page-content").html($(data).find("data").html());
 
         		     		        	
         	 		});
@@ -127,7 +127,7 @@ $(document).ready(function(){
 //    		    		 document.open();
 //    		             document.write(data);
 //    		             document.close();
-            			$("body").html($(data).find("data").html());
+            			$("#page-content").html($(data).find("data").html());
 
        		 		     		        	
         	 		});
@@ -149,7 +149,7 @@ $(document).ready(function(){
 //		    		 document.open();
 //		             document.write(data);
 //		             document.close();
-        			$("body").html($(data).find("data").html());
+        			$("#page-content").html($(data).find("data").html());
 
     		     		        	
     	 		});
@@ -162,7 +162,7 @@ $(document).ready(function(){
 //					 document.open();
 //		             document.write(data);
 //		             document.close();
-	        			$("body").html($(data).find("data").html());
+	        			$("#page-content").html($(data).find("data").html());
 
 	     		        	
 			        });
@@ -187,48 +187,129 @@ $(document).ready(function(){
 
         });
     });
+	
+	var map3 = {};
+	$(document).on('click', '#sub-main', function(){
+    	map3["reqtype"] = "payment";
+    	map3["login"] = $("#log-main").val();
+    	map3["password"] = $("#pass-main").val();
+        $.post(path,
+        map3,
+        function(data, status){
+			$("#login-area").html($(data).find("user").html());
+			$("#page-content").html($(data).find("data").html());
+
+        });
+    });
     
 
 	$(document).on('click', '#acc', function(){
         $.get(path + "?reqtype=account",
         function(data, status){
-        	//alert(data);
-//        	document.open();
-//            document.write(data);
-//            document.close();
-			$("body").html($(data).find("data").html());
+			$("#page-content").html($(data).find("data").html());
 
         });
     });
+	
+	$(document).on('click', '#logout', function(){
+        $.get(path + "?reqtype=logout",
+        function(data, status){
+        	$("#login-area").html($(data).find("data").html());
+        });
+    });
+	
+
     
 //    confirmation area
 	$(document).on('click', '#confirm', function(){
-        $.get(path + "?reqtype=confirm",
-        function(data, status){
-        	//alert(data);
-//        	document.open();
-//            document.write(data);
-//            document.close();
-			$("body").html($(data).find("data").html());
+		var logstatus = $('#logStatus').val();
+		if(logstatus == "true"){
+			$.get(path + "?reqtype=confirm",
+			        function(data, status){
+						$("#page-content").html($(data).find("data").html());
 
-        });
+			       });
+		}
+		else{
+  			$('#error').show("fast");
+  			setTimeout(function() { $("#error").hide(); }, 3000);
+  		}
+      	
+		
     });
     
     
 //    credit card area
       var map4 = {};
       $(document).on('click', '#pay', function(){
-	    	
-	    	map4["reqtype"] = "confirm";
-	    	map4["creditcard"] = $("#car_number").val();
-	        $.post(path2,
-	        map4,
-	        function(data, status){
-//	        	document.open();
-//	            document.write(data);
-//	            document.close();
-	        	$("body").html($(data).find("data").html());
-	        });
+    	  	var logstatus = $('#logStatus').val();
+			if(logstatus == "true"){
+		    	map4["reqtype"] = "confirm";
+		    	map4["creditcard"] = $("#car_number").val();
+		        $.post(path2,
+		        map4,
+		        function(data, status){
+		        	$("#page-content").html($(data).find("data").html());
+		        });
+			}
+			else{
+	  			$('#error').show("fast");
+	  			setTimeout(function() { $("#error").hide(); }, 3000);
+	  		}
 	    });
+      
+//   review section
+      
+      $(document).on('click', '.review', function(){
+    	  var bid = $(this).val();
+          $.get(path + "?reqtype=review&bid=" + bid,
+          function(data, status){
+  			$("#page-content").html($(data).find("data").html());
+
+          });
+      });
+      
+  
+      $(document).on('click', '.rate', function(){
+    	  var rating = $(this).val();
+          $("#rating").val(rating);
+      });
+      
+    var map5 = {};
+  	$(document).on('click', '#revSub', function(){
+  		var logstatus = $('#logStatus').val();
+  		if(logstatus == "true"){
+  			map5["reqtype"] = "review";
+  	      	map5["bid"] = $("#bid").val();
+  	      	map5["login"] = $("#login").val();
+  	      	map5["rating"] = $("#rating").val();
+  	      	map5["rev"] = $("#rev").val();
+
+  	          $.post(path,
+  	          map5,
+  	          function(data, status){
+  	        	  $("#page-content").html($(data).find("data").html());
+
+  	          });
+  		}
+  		else{
+  			$('#error').show("fast");
+  			setTimeout(function() { $("#error").hide(); }, 3000);
+  		}
+      	
+      });
+      
+//     search area
+  	
+  	$(document).on('click', '#search', function(){
+  	  var searchInput = $("#searchInput").val();
+        $.get(path + "?reqtype=catalog&query=search&text=" + searchInput,
+        function(data, status){
+        	$("#content").html($(data).find("data").html());
+
+        });
+    });
+
+
     
 });

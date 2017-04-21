@@ -27,7 +27,9 @@
 	  <option value="10">October</option>
 	  <option value="11">November</option>
 	  <option value="12">December</option>
-	  <option value="13">Popular</option>    
+	  <option value="13">Popular</option>
+	  <option value="14">Annomized Report</option>    
+	      
 	</select>
 	<button id="sub">Submit</button>
 	<div id="content"></div>

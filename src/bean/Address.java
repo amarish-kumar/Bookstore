@@ -2,17 +2,31 @@ package bean;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="shipTo")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Address implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	@XmlElement
 	private String street;
+	@XmlElement
 	private String province;
-	private String country;
+	@XmlElement
 	private String zip;
+	@XmlElement
 	private String phone;
+	@XmlAttribute
+	private int id;
+	@XmlAttribute
+	private String country;
 	
 	
 	

@@ -6,6 +6,7 @@ import java.util.Set;
 import bean.Book;
 
 public final class Calculation {
+	
 	public static int calculateCost(Map<Book,String> m){
 		
 		Set<Book> ks = m.keySet();

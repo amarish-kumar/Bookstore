@@ -11,13 +11,19 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 </head>
-<data>
-	<title>Confirm Page</title>
 	<c:set var="acc" scope="session" value="${sessionScope.account}"/>
 	<c:set var="poitems" scope="session" value="${sessionScope.poitems}"/>
 	<c:set var="address" scope="session" value="${sessionScope.address}"/>
 	<c:set var="po" scope="session" value="${sessionScope.po}"/>
-	
+	<c:set var="log" scope="session" value="${sessionScope.login}"/>	
+<user>	
+	<input id="logStatus" type="hidden" value="${log}"/>
+	<li class="navbar-text">Welcome back ${acc.getLogin()}</li>
+	<li class="navbar-text"><button id="logout" class="btn btn-sm btn-primary btn-block">log-out</button></li>
+</user>
+
+<data>
+	<title>Confirm Page</title>	
 	<div class="container wrapper"> 
             <div class="row cart-body">
                 <div class="form-horizontal">
@@ -55,6 +61,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 		                         <div class="form-group">
 	                                <div class="col-md-6 col-sm-6 col-xs-12">
 	                                    <button id="confirm" class="btn btn-primary btn-submit-fix">Confirmed</button>
+	                                    <p id="error" style="display: none">Please log in</p>
 	                                </div>
                             	</div> 
 	                        </div>

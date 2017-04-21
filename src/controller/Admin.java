@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.BookDAO;
+import DAO.PODAO;
 import bean.Book;
 import bean.PO;
-import model.BookDAO;
-import model.PODAO;
+import service.AdminService;
+import service.CatalogInfo;
+import service.CustomerInfo;
+import service.POInfo;
 
 /**
  * Servlet implementation class Admin
@@ -23,7 +27,7 @@ import model.PODAO;
 public class Admin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String ADMIN = "Admin.jspx";
-	private BookDAO bdao;
+	//private BookDAO bdao;
  
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,7 +35,17 @@ public class Admin extends HttpServlet {
     public Admin() {
         super();
         // TODO Auto-generated constructor stub
-        bdao = new BookDAO();
+        //bdao = new BookDAO();
+    }
+    
+    
+    @Override
+    public void init() throws ServletException{
+    	super.init();
+    	AdminService ADMINSERVICE = new AdminService();
+		this.getServletContext().setAttribute("ADMINSERVICE",ADMINSERVICE);
+		
+
     }
 
 	/**
@@ -39,28 +53,45 @@ public class Admin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html");
-		String s = request.getParameter("s");
-		Writer out = response.getWriter();
-		if(s != null)
-		{
-			//request.getRequestDispatcher(ADMIN).forward(request, response);
-			Integer m = Integer.parseInt(s);
-			if(m >= 0 && m <= 11){
-				List<Book> monthList = bdao.getBookSoldByMonth(m);
-				request.getSession().setAttribute("monthList",monthList);
-				request.getRequestDispatcher("/WEB-INF/xml/Report.jspx").forward(request,response);;
-
-			}
-			else
+		try {
+			response.setContentType("text/xml");
+			AdminService ADMINSERVICE = (AdminService) this.getServletContext().getAttribute("ADMINSERVICE");
+			String s = request.getParameter("s");
+			Writer out = response.getWriter();
+			if(s != null)
 			{
-				out.write("invalid selection");
-			}
-		}
-		else{
-			request.getRequestDispatcher(ADMIN).forward(request, response);
+				//request.getRequestDispatcher(ADMIN).forward(request, response);
+				Integer m = Integer.parseInt(s);
+				if(m >= 0 && m <= 12){
+					List<Book> monthList = ADMINSERVICE.getBookSoldByMonth(m);
+					request.getSession().setAttribute("monthList",monthList);
+					request.getRequestDispatcher("/WEB-INF/responses/Report.jspx").forward(request,response);
 
+				}
+				else if(m == 13){
+					Book popular = ADMINSERVICE.getMostPopularBook();
+					request.getServletContext().setAttribute("popular",popular);
+					request.getRequestDispatcher("/WEB-INF/responses/Popular.jspx").forward(request,response);
+				}
+//				else if(m == 14){
+//					request.getRequestDispatcher("/WEB-INF/responses/AnomizedReport.jspx").forward(request,response);
+//				}
+				else
+				{
+					out.write("invalid selection");
+				}
+			}
+			else{
+				request.getRequestDispatcher(ADMIN).forward(request, response);
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
+		
 
 	}
 

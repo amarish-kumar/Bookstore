@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.BookstoreDAOImp;
 import bean.Book;
 import bean.POItem;
-import model.BookstoreDAOImp;
 import model.Calculation;
 
 /**
@@ -26,12 +26,12 @@ import model.Calculation;
 @WebServlet("/Checkout")
 public class Checkout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String CHECKOUT = "/Checkout.jspx";
+	private static final String CHECKOUT = "/WEB-INF/responses/Checkout.jspx";
 	//private List<Book> checkOutBookList;
 //	private Map<Book,String> checkOutBookList;
 //	private BookstoreDAOImp bookstore;
 //	private int cost;
-	private List<POItem> poi;
+	//private List<POItem> poi;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,7 +39,7 @@ public class Checkout extends HttpServlet {
         super();
 //    	bookstore = new BookstoreDAOImp();
 //    	checkOutBookList = new HashMap<Book,String>();
-        poi = new ArrayList<POItem>();
+        //poi = new ArrayList<POItem>();
     	
 
         // TODO Auto-generated constructor stub
@@ -50,13 +50,16 @@ public class Checkout extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-//		response.setContentType("text/html");
-//		String path = request.getContextPath();
-//		request.getRequestDispatcher(CHECKOUT).forward(request, response);
-		//response.sendRedirect(path + CHECKOUT);
-
+		response.setContentType("text/xml");
+		String url= this.getServletContext().getContextPath() + "/Start" ;
+		String clientUrl = request.getRequestURI();
+		String reqtype = request.getParameter("reqtype");
+		
+		if(!clientUrl.endsWith("/Start") && reqtype == null)
+		{
+			response.sendRedirect(url);
+			return;
+		}
 
 		
 	}
@@ -65,40 +68,7 @@ public class Checkout extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	/*
-		
-		Map<String,String[]> map = request.getParameterMap();
-		
-		if(!map.isEmpty()){
-			Set<String> ks = new HashSet<String>(map.keySet());
-			for(String k : ks){
-				//fix here
-				
-				Book b = bookstore.findBookById(k);
-				String v =  map.get(k)[0];
-				if(v.equals("0")){
-					checkOutBookList.remove(b);
-				}
-				else
-				{
-					checkOutBookList.put(b,v);
-				}
-			}
-			cost = Calculation.calculateCost(checkOutBookList);
-			request.getSession().setAttribute("cost",cost);
-			request.getSession().setAttribute("checkOutBookList", checkOutBookList);
-
-		}*/
-//		@SuppressWarnings("unchecked")
-//		Map<Book,String> map = (Map<Book, String>) request.getSession().getAttribute("checkOutBookList");
-//		Set<Book> ks = map.keySet();
-//		for(Book b : ks){
-//			POItem item = new POItem();
-//			item.setBid(b.getBid());
-//			
-//		}
-		response.setContentType("text/html");
+		response.setContentType("text/xml");
 		request.getRequestDispatcher(CHECKOUT).forward(request, response);
 	
 	}

@@ -31,7 +31,7 @@ $(document).ready(function(){
     	}
     	
     });
-    
+	
     $(document).on('click', '.remove', function() {
         //alert("hello");
     	var curQuan = parseInt($(".quan").eq($(this).attr("value")).text());
